@@ -32,12 +32,18 @@ export default function Hero() {
           >
             <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-primary-600 shadow-lg shadow-primary-600/50">
               <img
-                src="/profile.jpg"
+                src="/profile.jpeg"
                 alt="Mohith H"
                 className="w-full h-full object-cover"
                 onError={(e) => {
-                  // Fallback if image not found
-                  (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect width='200' height='200' fill='%23374151'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui' font-size='72' fill='%239CA3AF'%3EMH%3C/text%3E%3C/svg%3E";
+                  // Try .jpg if .jpeg fails
+                  const img = e.target as HTMLImageElement;
+                  if (img.src.includes('.jpeg')) {
+                    img.src = "/profile.jpg";
+                  } else {
+                    // Fallback if neither image is found
+                    img.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect width='200' height='200' fill='%23374151'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui' font-size='72' fill='%239CA3AF'%3EMH%3C/text%3E%3C/svg%3E";
+                  }
                 }}
               />
             </div>
