@@ -82,7 +82,7 @@ export default function Skills() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-12 grid md:grid-cols-3 gap-6"
+          className="mt-12 grid md:grid-cols-2 gap-6 max-w-4xl mx-auto"
         >
           <SkillHighlight
             icon="🧠"
@@ -93,11 +93,6 @@ export default function Skills() {
             icon="🔬"
             title="Research"
             description="Published research in physics-informed ML and molecular dynamics"
-          />
-          <SkillHighlight
-            icon="💻"
-            title="Web Development"
-            description="Building modern applications with JavaScript, React, Next.js, and Node.js"
           />
         </motion.div>
       </div>

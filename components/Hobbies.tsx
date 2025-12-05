@@ -14,58 +14,10 @@ const iconMap: Record<string, any> = {
 
 export default function Hobbies() {
   const [selectedGallery, setSelectedGallery] = useState<typeof hobbies[0] | null>(null);
-  const [galleryImages, setGalleryImages] = useState<string[]>([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  // Load images when gallery is opened
-  useEffect(() => {
-    if (selectedGallery && selectedGallery.hasGallery) {
-      loadGalleryImages(selectedGallery.galleryFolder || "");
-    }
-  }, [selectedGallery]);
-
-  const loadGalleryImages = async (folder: string) => {
-    try {
-      // Try to load images from the folder
-      // Since we can't dynamically read directory in the browser,
-      // we'll try common image extensions and numbers
-      const images: string[] = [];
-      const extensions = ['jpg', 'jpeg', 'png', 'webp'];
-
-      // Try loading up to 20 images with common naming patterns
-      for (let i = 1; i <= 20; i++) {
-        for (const ext of extensions) {
-          const imagePath = `${folder}/image${i}.${ext}`;
-          const altPath = `${folder}/${i}.${ext}`;
-
-          // We'll add both patterns and let the browser handle 404s
-          if (i <= 10) { // Only try first 10 to avoid too many requests
-            images.push(imagePath);
-            images.push(altPath);
-          }
-        }
-      }
-
-      // Also try some common patterns
-      const commonPatterns = ['sketch', 'sky', 'photo', 'pic', 'img'];
-      for (const pattern of commonPatterns) {
-        for (let i = 1; i <= 5; i++) {
-          for (const ext of extensions) {
-            images.push(`${folder}/${pattern}${i}.${ext}`);
-            images.push(`${folder}/${pattern}_${i}.${ext}`);
-          }
-        }
-      }
-
-      setGalleryImages(images);
-    } catch (error) {
-      console.error("Error loading gallery images:", error);
-      setGalleryImages([]);
-    }
-  };
-
   const handleOpenGallery = (hobby: typeof hobbies[0]) => {
-    if (hobby.hasGallery) {
+    if (hobby.hasGallery && hobby.images && hobby.images.length > 0) {
       setSelectedGallery(hobby);
       setCurrentImageIndex(0);
     }
@@ -73,16 +25,19 @@ export default function Hobbies() {
 
   const handleCloseGallery = () => {
     setSelectedGallery(null);
-    setGalleryImages([]);
     setCurrentImageIndex(0);
   };
 
   const handleNextImage = () => {
-    setCurrentImageIndex((prev) => (prev + 1) % galleryImages.length);
+    if (selectedGallery && selectedGallery.images) {
+      setCurrentImageIndex((prev) => (prev + 1) % selectedGallery.images.length);
+    }
   };
 
   const handlePrevImage = () => {
-    setCurrentImageIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
+    if (selectedGallery && selectedGallery.images) {
+      setCurrentImageIndex((prev) => (prev - 1 + selectedGallery.images.length) % selectedGallery.images.length);
+    }
   };
 
   return (
@@ -128,10 +83,10 @@ export default function Hobbies() {
 
       {/* Gallery Modal */}
       <AnimatePresence>
-        {selectedGallery && (
+        {selectedGallery && selectedGallery.images && (
           <GalleryModal
             hobby={selectedGallery}
-            images={galleryImages}
+            images={selectedGallery.images}
             currentIndex={currentImageIndex}
             onClose={handleCloseGallery}
             onNext={handleNextImage}
@@ -243,29 +198,6 @@ function GalleryModal({
   onNext: () => void;
   onPrev: () => void;
 }) {
-  const [validImages, setValidImages] = useState<string[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    // Filter out images that don't exist
-    const checkImages = async () => {
-      const valid: string[] = [];
-      for (const img of images) {
-        try {
-          const response = await fetch(img, { method: 'HEAD' });
-          if (response.ok) {
-            valid.push(img);
-          }
-        } catch {
-          // Image doesn't exist, skip it
-        }
-      }
-      setValidImages(valid);
-      setLoading(false);
-    };
-
-    checkImages();
-  }, [images]);
 
   return (
     <motion.div
@@ -297,20 +229,12 @@ function GalleryModal({
           <p className="text-gray-400">{hobby.description}</p>
         </div>
 
-        {loading ? (
-          <div className="glass-effect p-20 rounded-xl text-center">
-            <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary-500 mx-auto mb-4"></div>
-            <p className="text-gray-400">Loading gallery...</p>
-          </div>
-        ) : validImages.length === 0 ? (
+        {images.length === 0 ? (
           <div className="glass-effect p-20 rounded-xl text-center">
             <Camera className="w-16 h-16 text-gray-500 mx-auto mb-4" />
-            <p className="text-gray-400 text-lg mb-2">No images found</p>
+            <p className="text-gray-400 text-lg mb-2">No images added yet</p>
             <p className="text-sm text-gray-500">
-              Add your images to <code className="bg-gray-800 px-2 py-1 rounded">{hobby.galleryFolder}</code>
-            </p>
-            <p className="text-xs text-gray-600 mt-2">
-              Supported patterns: image1.jpg, 1.jpg, sketch1.png, sky1.jpg, etc.
+              Add image paths to the data file for this hobby
             </p>
           </div>
         ) : (
@@ -319,17 +243,14 @@ function GalleryModal({
             <div className="relative glass-effect p-4 rounded-xl mb-4">
               <div className="relative aspect-video bg-gray-900 rounded-lg overflow-hidden">
                 <img
-                  src={validImages[currentIndex]}
+                  src={images[currentIndex]}
                   alt={`${hobby.title} ${currentIndex + 1}`}
                   className="w-full h-full object-contain"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).style.display = 'none';
-                  }}
                 />
               </div>
 
               {/* Navigation Arrows */}
-              {validImages.length > 1 && (
+              {images.length > 1 && (
                 <>
                   <button
                     onClick={onPrev}
@@ -349,15 +270,15 @@ function GalleryModal({
               {/* Image Counter */}
               <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-gray-800/80 px-4 py-2 rounded-full">
                 <span className="text-white text-sm">
-                  {currentIndex + 1} / {validImages.length}
+                  {currentIndex + 1} / {images.length}
                 </span>
               </div>
             </div>
 
             {/* Thumbnail Strip */}
-            {validImages.length > 1 && (
+            {images.length > 1 && (
               <div className="flex gap-2 overflow-x-auto pb-2">
-                {validImages.map((img, idx) => (
+                {images.map((img, idx) => (
                   <button
                     key={idx}
                     onClick={() => onNext()}
