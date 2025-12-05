@@ -148,7 +148,7 @@ export const projects = [
     date: "Apr '25",
     category: "Computer Vision",
     featured: false,
-    fullDescription: "Built a custom CNN with 97% accuracy and 0.978 F1-score on chest X-rays. Applied Grad-CAM to highlight infected regions and generate interpretable clinical insights. (You can add more detailed description, images, and videos here later)"
+    fullDescription: "Built a custom CNN with 97% accuracy and 0.978 F1-score on chest X-rays. Applied Grad-CAM to highlight infected regions and generate interpretable clinical insights."
   },
   {
     title: "CNN-LSTM & CNN-Transformer for Remote Sensing",
@@ -160,20 +160,11 @@ export const projects = [
     featured: false,
     fullDescription: "Implemented CNN-LSTM and CNN-Transformer architectures for automated captioning of satellite images. Experimented with ResNet, MobileNetV2, InceptionV3 for feature extraction. (You can add more detailed description, images, and videos here later)"
   },
-  {
-    title: "Custom CNN for Chest X-ray Classification",
-    slug: "custom-cnn-chest-xray",
-    description: "Built a custom CNN with 97% accuracy and 0.978 F1-score on chest X-rays using a tailored Keras architecture. Applied Grad-CAM to highlight infected regions.",
-    tech: ["Python", "Keras", "CNN", "Grad-CAM"],
-    date: "Apr '25",
-    category: "Computer Vision",
-    featured: false,
-    fullDescription: "Built a custom CNN with 97% accuracy and 0.978 F1-score on chest X-rays using a tailored Keras architecture. Applied Grad-CAM to highlight infected regions. (You can add more detailed description, images, and videos here later)"
-  },
+
   {
     title: "Wi-Fi Controlled Quadcopter",
     slug: "wifi-controlled-quadcopter",
-    description: "Coordinated a team of 16 to assemble a quadcopter achieving a record flight of 120+ seconds. Integrated lightweight, durable components with Arduino, MPU 6050, and NodeMCU.",
+    description: "Coordinated a team of 6 to assemble a quadcopter achieving a record flight of 120+ seconds. Integrated lightweight, durable components with Arduino, MPU 6050, and NodeMCU.",
     tech: ["Arduino", "NodeMCU", "MPU 6050", "RemoteXY", "C++"],
     date: "Jan '24 - Apr '24",
     category: "Robotics",
