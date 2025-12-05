@@ -1,14 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Brain, Code, Leaf, Lightbulb } from "lucide-react";
+import { Brain, Pencil, Music, Camera } from "lucide-react";
 import { hobbies } from "@/lib/data";
 
 const iconMap: Record<string, any> = {
   Brain,
-  Code,
-  Leaf,
-  Lightbulb,
+  Pencil,
+  Music,
+  Camera,
 };
 
 export default function Hobbies() {
@@ -32,7 +32,7 @@ export default function Hobbies() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {hobbies.map((hobby, index) => {
-            const Icon = iconMap[hobby.icon] || Lightbulb;
+            const Icon = iconMap[hobby.icon] || Brain;
             return (
               <motion.div
                 key={index}

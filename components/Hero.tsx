@@ -5,13 +5,6 @@ import { ArrowDown, Github, Linkedin, Mail } from "lucide-react";
 import { personalInfo } from "@/lib/data";
 
 export default function Hero() {
-  const roles = [
-    "AI/ML Researcher",
-    "Chemical Engineering Student",
-    "Full-Stack Developer",
-    "Problem Solver"
-  ];
-
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Animated Background */}
@@ -30,23 +23,34 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <motion.h1
-            className="text-5xl sm:text-7xl lg:text-8xl font-bold mb-6"
+          {/* Profile Photo - Add your photo in public/profile.jpg */}
+          <motion.div
+            className="mb-8 flex justify-center"
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <span className="text-gradient">Mohith H</span>
-          </motion.h1>
+            <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-primary-600 shadow-lg shadow-primary-600/50">
+              <img
+                src="/profile.jpg"
+                alt="Mohith H"
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  // Fallback if image not found
+                  (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect width='200' height='200' fill='%23374151'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui' font-size='72' fill='%239CA3AF'%3EMH%3C/text%3E%3C/svg%3E";
+                }}
+              />
+            </div>
+          </motion.div>
 
-          <motion.div
-            className="text-2xl sm:text-3xl lg:text-4xl text-gray-300 mb-8 h-20 flex items-center justify-center"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+          <motion.h1
+            className="text-5xl sm:text-7xl lg:text-8xl font-bold mb-12"
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <TypewriterText roles={roles} />
-          </motion.div>
+            <span className="text-gradient">Mohith H</span>
+          </motion.h1>
 
           <motion.p
             className="text-lg sm:text-xl text-gray-400 mb-12 max-w-2xl mx-auto"
@@ -105,30 +109,6 @@ export default function Hero() {
   );
 }
 
-function TypewriterText({ roles }: { roles: string[] }) {
-  const [currentRole, setCurrentRole] = React.useState(0);
-
-  React.useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentRole((prev) => (prev + 1) % roles.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [roles.length]);
-
-  return (
-    <motion.span
-      key={currentRole}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.5 }}
-      className="text-primary-400"
-    >
-      {roles[currentRole]}
-    </motion.span>
-  );
-}
-
 function SocialLink({ href, icon, label }: { href: string; icon: React.ReactNode; label: string }) {
   return (
     <motion.a
@@ -147,5 +127,3 @@ function SocialLink({ href, icon, label }: { href: string; icon: React.ReactNode
   );
 }
 
-// Add React import
-import React from "react";

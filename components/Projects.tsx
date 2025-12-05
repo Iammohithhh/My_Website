@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Github, ExternalLink, Folder, Star } from "lucide-react";
 import { projects } from "@/lib/data";
 import { useState, useEffect } from "react";
+import Link from "next/link";
 
 interface GitHubRepo {
   id: number;
@@ -94,7 +95,9 @@ export default function Projects() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <ProjectCard project={project} />
+              <Link href={`/projects/${project.slug}`}>
+                <ProjectCard project={project} />
+              </Link>
             </motion.div>
           ))}
         </div>
@@ -134,7 +137,7 @@ function ProjectCard({ project }: { project: typeof projects[0] }) {
   return (
     <motion.div
       whileHover={{ y: -5 }}
-      className="glass-effect p-6 rounded-xl h-full flex flex-col hover:bg-gray-800/40 transition-all duration-300 group relative overflow-hidden"
+      className="glass-effect p-6 rounded-xl h-full flex flex-col hover:bg-gray-800/40 transition-all duration-300 group relative overflow-hidden cursor-pointer"
     >
       {/* Gradient Border Effect */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary-600/20 to-neon-cyan/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" />
