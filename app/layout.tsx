@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description: "Portfolio of Mohith H - Chemical Engineering student at IIT Bombay specializing in AI/ML research and development",
   keywords: ["Mohith H", "IIT Bombay", "AI", "Machine Learning", "Chemical Engineering", "Research"],
   icons: {
-    icon: "/icon.png"
+    icon: "/icon_new.png"
   },
 };
 
