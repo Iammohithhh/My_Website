@@ -187,21 +187,27 @@ export const hobbies = [
   {
     title: "Quizzing",
     description: "Secured 1st place in district-level science quiz among 40+ teams. Represented district in Thatt Antha Heli Science Quiz on DD Chandana.",
-    icon: "Brain"
+    icon: "Brain",
+    hasGallery: false
   },
   {
     title: "Sketching",
-    description: "Creating artistic sketches and drawings. (Add your sketches later)",
-    icon: "Pencil"
+    description: "Creating artistic sketches and drawings.",
+    icon: "Pencil",
+    hasGallery: true,
+    galleryFolder: "/hobbies/sketches"
   },
   {
     title: "Whistling Songs",
     description: "Enjoy whistling melodies and songs in my free time.",
-    icon: "Music"
+    icon: "Music",
+    hasGallery: false
   },
   {
     title: "Sky Pictures",
-    description: "Capturing beautiful moments of the sky through photography. (Add your photos later)",
-    icon: "Camera"
+    description: "Capturing beautiful moments of the sky through photography.",
+    icon: "Camera",
+    hasGallery: true,
+    galleryFolder: "/hobbies/sky-pictures"
   }
 ];
