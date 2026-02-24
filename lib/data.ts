@@ -69,7 +69,21 @@ export const experiences = [
   }
 ];
 
-export const projects = [
+interface Project {
+  title: string;
+  slug: string;
+  description: string;
+  tech: string[];
+  date: string;
+  category: string;
+  featured: boolean;
+  fullDescription: string;
+  images: string[];
+  videos: string[];
+  pdfs: string[];
+}
+
+export const projects: Project[] = [
   {
     title: "SOAP Descriptors Multi-Scale ML",
     slug: "soap-descriptors-ml",
@@ -78,7 +92,10 @@ export const projects = [
     date: "Nov '25 - Present",
     category: "Research",
     featured: true,
-    fullDescription: "Built a unified multi-scale water environment preparation for extracting and standardizing SOAP descriptors across ACN/DMF trajectories, creating a global environment dataset for comparative solvation analysis. (You can add more detailed description, images, and videos here later)"
+    fullDescription: "Built a unified multi-scale water environment preparation for extracting and standardizing SOAP descriptors across ACN/DMF trajectories, creating a global environment dataset for comparative solvation analysis.",
+    images: [],
+    videos: [],
+    pdfs: []
   },
   {
     title: "ML Interatomic Potentials with Long-Range Interactions",
@@ -88,7 +105,10 @@ export const projects = [
     date: "May '25 - Present",
     category: "Research",
     featured: true,
-    fullDescription: "Built a production-grade Python DDAP pipeline for reciprocal-space Gaussian fitting and stable atomic charge extraction. Implemented Ewald-based long-range electrostatics using DDAP-derived atomic charges. (You can add more detailed description, images, and videos here later)"
+    fullDescription: "Built a production-grade Python DDAP pipeline for reciprocal-space Gaussian fitting and stable atomic charge extraction. Implemented Ewald-based long-range electrostatics using DDAP-derived atomic charges.",
+    images: [],
+    videos: [],
+    pdfs: []
   },
   {
     title: "Physics-Informed Diffusion Models for CT Reconstruction",
@@ -98,7 +118,10 @@ export const projects = [
     date: "Sep '25 - Present",
     category: "Machine Learning",
     featured: true,
-    fullDescription: "Adapted the PINN-DaDiff framework from MRI to CT by replacing Fourier-domain physics with fully differentiable Radon transform. Built a four-stage physics-informed generative pipeline for X-ray photon statistics. (You can add more detailed description, images, and videos here later)"
+    fullDescription: "Adapted the PINN-DaDiff framework from MRI to CT by replacing Fourier-domain physics with fully differentiable Radon transform. Built a four-stage physics-informed generative pipeline for X-ray photon statistics.",
+    images: [],
+    videos: [],
+    pdfs: []
   },
   {
     title: "AI Guard Agent for Room Monitoring",
@@ -108,7 +131,10 @@ export const projects = [
     date: "Sep '25",
     category: "Computer Vision",
     featured: true,
-    fullDescription: "Developed an AI guard agent with DeepFace, MediaPipe, Whisper, and TTS for real-time monitoring. Designed guard-level user enrollment and command activation to deter unwanted access. (You can add more detailed description, images, and videos here later)"
+    fullDescription: "Developed an AI guard agent with DeepFace, MediaPipe, Whisper, and TTS for real-time monitoring. Designed guard-level user enrollment and command activation to deter unwanted access.",
+    images: [],
+    videos: [],
+    pdfs: []
   },
   {
     title: "RAG-Powered ReAct Agent",
@@ -118,7 +144,10 @@ export const projects = [
     date: "May '25 - Jun '25",
     category: "Machine Learning",
     featured: true,
-    fullDescription: "Built a LangChain-based ReAct agent with Groq LLMs, integrating Hugging Face embeddings, ChromaDB, and a modular RAG pipeline for semantic retrieval and tool-based control flow. (You can add more detailed description, images, and videos here later)"
+    fullDescription: "Built a LangChain-based ReAct agent with Groq LLMs, integrating Hugging Face embeddings, ChromaDB, and a modular RAG pipeline for semantic retrieval and tool-based control flow.",
+    images: [],
+    videos: [],
+    pdfs: []
   },
   {
     title: "DOGGO 1.0 - Quadruped Robot",
@@ -128,7 +157,10 @@ export const projects = [
     date: "Jan '25 - Apr '25",
     category: "Robotics",
     featured: true,
-    fullDescription: "Designed the mechanical structure of the bot using SolidWorks and simulated the environment in Gazebo Fortress. Integrated ROS 2 with Python and implemented 2-DOF leg motion for stable gait generation using Inverse Kinematics. (You can add more detailed description, images, and videos here later)"
+    fullDescription: "Designed the mechanical structure of the bot using SolidWorks and simulated the environment in Gazebo Fortress. Integrated ROS 2 with Python and implemented 2-DOF leg motion for stable gait generation using Inverse Kinematics.",
+    images: [],
+    videos: [],
+    pdfs: []
   },
   {
     title: "Stable Diffusion Text-to-Image Generation",
@@ -138,7 +170,10 @@ export const projects = [
     date: "Jan '25",
     category: "Generative AI",
     featured: false,
-    fullDescription: "Built a complete Stable Diffusion pipeline in PyTorch, implementing core components including variational autoencoder (VAE), U-Net encoder, and CLIP-based text encoder. (You can add more detailed description, images, and videos here later)"
+    fullDescription: "Built a complete Stable Diffusion pipeline in PyTorch, implementing core components including variational autoencoder (VAE), U-Net encoder, and CLIP-based text encoder.",
+    images: [],
+    videos: [],
+    pdfs: []
   },
   {
     title: "Explainable CNN for Pneumonia Detection",
@@ -148,7 +183,10 @@ export const projects = [
     date: "Apr '25",
     category: "Computer Vision",
     featured: false,
-    fullDescription: "Built a custom CNN with 97% accuracy and 0.978 F1-score on chest X-rays. Applied Grad-CAM to highlight infected regions and generate interpretable clinical insights."
+    fullDescription: "Built a custom CNN with 97% accuracy and 0.978 F1-score on chest X-rays. Applied Grad-CAM to highlight infected regions and generate interpretable clinical insights.",
+    images: [],
+    videos: [],
+    pdfs: []
   },
   {
     title: "CNN-LSTM & CNN-Transformer for Remote Sensing",
@@ -158,9 +196,24 @@ export const projects = [
     date: "Aug '25",
     category: "Computer Vision",
     featured: false,
-    fullDescription: "Implemented CNN-LSTM and CNN-Transformer architectures for automated captioning of satellite images. Experimented with ResNet, MobileNetV2, InceptionV3 for feature extraction. (You can add more detailed description, images, and videos here later)"
+    fullDescription: "Implemented CNN-LSTM and CNN-Transformer architectures for automated captioning of satellite images. Experimented with ResNet, MobileNetV2, InceptionV3 for feature extraction.",
+    images: [],
+    videos: [],
+    pdfs: []
   },
-
+  {
+    title: "Custom CNN for Chest X-ray Classification",
+    slug: "custom-cnn-chest-xray",
+    description: "Built a custom CNN with 97% accuracy and 0.978 F1-score on chest X-rays using a tailored Keras architecture. Applied Grad-CAM to highlight infected regions.",
+    tech: ["Python", "Keras", "CNN", "Grad-CAM"],
+    date: "Apr '25",
+    category: "Computer Vision",
+    featured: false,
+    fullDescription: "Built a custom CNN with 97% accuracy and 0.978 F1-score on chest X-rays using a tailored Keras architecture. Applied Grad-CAM to highlight infected regions.",
+    images: [],
+    videos: [],
+    pdfs: []
+  },
   {
     title: "Wi-Fi Controlled Quadcopter",
     slug: "wifi-controlled-quadcopter",
@@ -169,7 +222,10 @@ export const projects = [
     date: "Jan '24 - Apr '24",
     category: "Robotics",
     featured: false,
-    fullDescription: "Coordinated a team of 16 to assemble a quadcopter achieving a record flight of 120+ seconds. Integrated lightweight, durable components with Arduino, MPU 6050, and NodeMCU. (You can add more detailed description, images, and videos here later)"
+    fullDescription: "Coordinated a team of 16 to assemble a quadcopter achieving a record flight of 120+ seconds. Integrated lightweight, durable components with Arduino, MPU 6050, and NodeMCU.",
+    images: [],
+    videos: [],
+    pdfs: []
   }
 ];
 
