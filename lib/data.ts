@@ -25,9 +25,8 @@ export const about = {
 export const skills = {
   "Programming Languages": ["Python", "C++", "JavaScript", "TypeScript", "HTML", "Bash", "LaTeX"],
   "ML/AI Frameworks": ["PyTorch", "TensorFlow", "Scikit-learn", "Qiskit", "Pandas", "NumPy"],
-  "Web Development": ["React", "Next.js", "Tailwind CSS", "Node.js"],
   "Tools & Software": ["Git", "ROS", "Gazebo", "Arduino", "SolidWorks", "AutoCAD P&ID", "Fusion360", "Matplotlib"],
-  "Databases": ["MySQL"],
+  "Databases": ["MySQL"]
 };
 
 export const experiences = [
@@ -218,7 +217,7 @@ export const projects: Project[] = [
   {
     title: "Wi-Fi Controlled Quadcopter",
     slug: "wifi-controlled-quadcopter",
-    description: "Coordinated a team of 16 to assemble a quadcopter achieving a record flight of 120+ seconds. Integrated lightweight, durable components with Arduino, MPU 6050, and NodeMCU.",
+    description: "Coordinated a team of 6 to assemble a quadcopter achieving a record flight of 120+ seconds. Integrated lightweight, durable components with Arduino, MPU 6050, and NodeMCU.",
     tech: ["Arduino", "NodeMCU", "MPU 6050", "RemoteXY", "C++"],
     date: "Jan '24 - Apr '24",
     category: "Robotics",
@@ -264,6 +263,17 @@ export const hobbies = [
     description: "Capturing beautiful moments of the sky through photography.",
     icon: "Camera",
     hasGallery: true,
-    images: []
+    images: [
+      "/hobbies/sky-pictures/sky1.jpeg",
+      "/hobbies/sky-pictures/sky2.jpeg",
+      "/hobbies/sky-pictures/sky3.jpeg",
+      "/hobbies/sky-pictures/sky4.jpeg",
+      "/hobbies/sky-pictures/sky5.jpeg",
+      "/hobbies/sky-pictures/sky6.jpeg",
+      "/hobbies/sky-pictures/sky7.jpeg",
+      "/hobbies/sky-pictures/sky8.jpeg",
+      "/hobbies/sky-pictures/sky9.jpeg"
+
+    ]
   }
 ];
