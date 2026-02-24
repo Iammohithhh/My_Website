@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowLeft, Calendar, Folder, Github, ExternalLink } from "lucide-react";
+import { ArrowLeft, Calendar, Folder, Image, Video, FileText } from "lucide-react";
 import { projects } from "@/lib/data";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -33,6 +33,11 @@ export default function ProjectDetailPage() {
       </div>
     );
   }
+
+  const hasImages = project.images && project.images.length > 0;
+  const hasVideos = project.videos && project.videos.length > 0;
+  const hasPdfs = project.pdfs && project.pdfs.length > 0;
+  const hasMedia = hasImages || hasVideos || hasPdfs;
 
   return (
     <main className="min-h-screen bg-gray-950">
@@ -126,23 +131,136 @@ export default function ProjectDetailPage() {
             </div>
           </motion.div>
 
-          {/* Images Section - Placeholder */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="mb-12"
-          >
-            <h2 className="text-2xl font-bold text-white mb-4">Images & Media</h2>
-            <div className="glass-effect p-8 rounded-xl text-center">
-              <p className="text-gray-400 italic">
-                You can add project images and videos here later.
-              </p>
-              <p className="text-sm text-gray-500 mt-2">
-                Add your images to the public folder and reference them here.
-              </p>
-            </div>
-          </motion.div>
+          {/* Images Section */}
+          {hasImages && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="mb-12"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <Image className="w-6 h-6 text-primary-400" />
+                <h2 className="text-2xl font-bold text-white">Images</h2>
+              </div>
+              <div className="grid md:grid-cols-2 gap-4">
+                {project.images!.map((img, idx) => (
+                  <motion.div
+                    key={idx}
+                    whileHover={{ scale: 1.02 }}
+                    className="glass-effect p-2 rounded-xl overflow-hidden"
+                  >
+                    <img
+                      src={img}
+                      alt={`${project.title} image ${idx + 1}`}
+                      className="w-full h-auto rounded-lg"
+                    />
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          )}
+
+          {/* Videos Section */}
+          {hasVideos && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              className="mb-12"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <Video className="w-6 h-6 text-primary-400" />
+                <h2 className="text-2xl font-bold text-white">Videos</h2>
+              </div>
+              <div className="space-y-6">
+                {project.videos!.map((video, idx) => (
+                  <div key={idx} className="glass-effect p-4 rounded-xl">
+                    {video.endsWith(".mp4") || video.endsWith(".webm") || video.endsWith(".mov") ? (
+                      <video
+                        controls
+                        className="w-full rounded-lg"
+                        preload="metadata"
+                      >
+                        <source src={video} type={`video/${video.split('.').pop()}`} />
+                        Your browser does not support the video tag.
+                      </video>
+                    ) : (
+                      // YouTube / external embed
+                      <div className="aspect-video">
+                        <iframe
+                          src={video}
+                          className="w-full h-full rounded-lg"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                        />
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          )}
+
+          {/* PDFs Section */}
+          {hasPdfs && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.7 }}
+              className="mb-12"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <FileText className="w-6 h-6 text-primary-400" />
+                <h2 className="text-2xl font-bold text-white">Documents</h2>
+              </div>
+              <div className="space-y-4">
+                {project.pdfs!.map((pdf, idx) => (
+                  <div key={idx} className="glass-effect rounded-xl overflow-hidden">
+                    {/* PDF Viewer */}
+                    <div className="aspect-[4/3] bg-gray-900">
+                      <iframe
+                        src={pdf}
+                        className="w-full h-full"
+                        title={`${project.title} document ${idx + 1}`}
+                      />
+                    </div>
+                    {/* Download Link */}
+                    <div className="p-4 flex items-center justify-between">
+                      <span className="text-gray-400 text-sm">
+                        Document {idx + 1}
+                      </span>
+                      <a
+                        href={pdf}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-4 py-2 bg-primary-600/20 text-primary-300 rounded-lg text-sm hover:bg-primary-600/30 transition-colors"
+                      >
+                        Open PDF
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          )}
+
+          {/* Show placeholder only if no media at all */}
+          {!hasMedia && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              className="mb-12"
+            >
+              <h2 className="text-2xl font-bold text-white mb-4">Media</h2>
+              <div className="glass-effect p-8 rounded-xl text-center">
+                <p className="text-gray-400 italic">
+                  Images, videos, and documents will be added here.
+                </p>
+              </div>
+            </motion.div>
+          )}
 
           {/* Back Button */}
           <motion.div
