@@ -7,11 +7,10 @@ import { Menu, X } from "lucide-react";
 const navItems = [
   { name: "Home", href: "/" },
   { name: "About", href: "/#about" },
-  { name: "Projects", href: "/#projects" },
-  { name: "Skills", href: "/#skills" },
   { name: "Experience", href: "/#experience" },
+  { name: "Projects", href: "/#projects" },
+  { name: "Publications", href: "/#publications" },
   { name: "Hobbies", href: "/#hobbies" },
-  { name: "Vibes", href: "/vibes" },
   { name: "Contact", href: "/#contact" },
 ];
 
@@ -20,10 +19,7 @@ export default function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -35,41 +31,34 @@ export default function Navigation() {
       transition={{ duration: 0.6 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "glass-effect border-b border-gray-800/50 py-4"
-          : "bg-transparent py-6"
+          ? "bg-parchment/90 backdrop-blur-md border-b border-parchment-darker shadow-sm py-3"
+          : "bg-transparent py-5"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          {/* Logo */}
-          <motion.a
-            href="#"
-            className="text-2xl font-bold"
-            whileHover={{ scale: 1.05 }}
-          >
+          <motion.a href="#" className="text-2xl font-bold" whileHover={{ scale: 1.05 }}>
             <span className="text-gradient">MH</span>
           </motion.a>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-7">
             {navItems.map((item, index) => (
               <motion.a
                 key={item.name}
                 href={item.href}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="text-gray-300 hover:text-primary-400 transition-colors font-medium"
-                whileHover={{ scale: 1.1 }}
+                transition={{ duration: 0.5, delay: index * 0.08 }}
+                className="text-ink/70 hover:text-indigo font-medium text-sm transition-colors duration-200 tracking-wide"
+                whileHover={{ scale: 1.05 }}
               >
                 {item.name}
               </motion.a>
             ))}
           </div>
 
-          {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2 text-gray-300 hover:text-primary-400 transition-colors"
+            className="md:hidden p-2 text-ink/70 hover:text-indigo transition-colors"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -77,20 +66,19 @@ export default function Navigation() {
           </button>
         </div>
 
-        {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden mt-4 glass-effect rounded-xl p-6"
+            className="md:hidden mt-3 paper-card rounded-xl p-5"
           >
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-3">
               {navItems.map((item) => (
                 <a
                   key={item.name}
                   href={item.href}
-                  className="text-gray-300 hover:text-primary-400 transition-colors font-medium py-2"
+                  className="text-ink/70 hover:text-indigo font-medium py-1.5 text-sm transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {item.name}

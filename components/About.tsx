@@ -1,58 +1,92 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { GraduationCap } from "lucide-react";
+import { GraduationCap, Award } from "lucide-react";
 import { about } from "@/lib/data";
 
 export default function About() {
   return (
-    <section id="about" className="py-20 px-4 sm:px-6 lg:px-8 relative">
-      <div className="max-w-7xl mx-auto">
+    <section id="about" className="py-20 px-4 sm:px-6 lg:px-8 section-alt">
+      <div className="max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
+          className="text-center mb-14"
         >
-          <h2 className="text-4xl sm:text-5xl font-bold text-center mb-4">
+          <p className="tag-mono text-indigo/70 uppercase tracking-widest mb-2">Background</p>
+          <h2 className="text-4xl sm:text-5xl font-bold text-ink">
             About <span className="text-gradient">Me</span>
           </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-primary-600 to-neon-cyan mx-auto mb-16" />
+          <div className="w-16 h-0.5 bg-gradient-to-r from-indigo to-science mx-auto mt-4" />
         </motion.div>
 
-        <div className="max-w-4xl mx-auto">
-          {/* Bio Section */}
+        <div className="grid md:grid-cols-2 gap-8">
+          {/* Bio + Education */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="space-y-6"
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="space-y-5"
           >
-            <p className="text-lg text-gray-300 leading-relaxed text-center mb-8">
+            <p className="text-ink/70 leading-relaxed text-base">
               {about.bio}
             </p>
 
-            {/* Education Card */}
-            <div className="glass-effect p-6 rounded-xl hover:bg-gray-800/40 transition-all duration-300 group">
+            <div className="paper-card p-5 rounded-xl group hover:shadow-md transition-shadow duration-300">
               <div className="flex items-start gap-4">
-                <div className="p-3 bg-primary-600/20 rounded-lg group-hover:bg-primary-600/30 transition-colors">
-                  <GraduationCap className="w-6 h-6 text-primary-400" />
+                <div className="p-2.5 bg-indigo-pale rounded-lg">
+                  <GraduationCap className="w-5 h-5 text-indigo" />
                 </div>
-                <div className="flex-1">
-                  <h3 className="text-xl font-semibold text-white mb-1">{about.education.degree}</h3>
-                  <p className="text-primary-400 font-medium mb-1">{about.education.institution}</p>
-                  <div className="flex items-center justify-between text-sm text-gray-400">
+                <div>
+                  <h3 className="font-semibold text-ink text-base">{about.education.degree}</h3>
+                  <p className="text-indigo font-medium text-sm mt-0.5">{about.education.institution}</p>
+                  <div className="flex items-center gap-3 mt-1.5 text-xs text-ink/50 tag-mono">
                     <span>{about.education.year}</span>
+                    <span>·</span>
+                    <span>CGPA {about.education.cgpa}</span>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="glass-effect p-6 rounded-xl">
-              <p className="text-sm text-gray-400 italic">
-                Pursuing a Minor in <span className="text-primary-400 font-semibold">Artificial Intelligence and Data Science</span> from C-MInDS Department, IIT Bombay
+            <div className="paper-card p-4 rounded-xl">
+              <p className="text-sm text-ink/60">
+                Minor in <span className="text-science-dark font-semibold">Artificial Intelligence & Data Science</span>
+                {" "}— C-MInDS Department, IIT Bombay
               </p>
+            </div>
+          </motion.div>
+
+          {/* Achievements */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <div className="paper-card p-6 rounded-xl h-full">
+              <div className="flex items-center gap-2 mb-5">
+                <Award className="w-4 h-4 text-amber" />
+                <h3 className="font-semibold text-ink text-sm uppercase tracking-wide tag-mono">Achievements</h3>
+              </div>
+              <ul className="space-y-3">
+                {about.achievements.map((a, i) => (
+                  <motion.li
+                    key={i}
+                    initial={{ opacity: 0, x: 10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: 0.1 + i * 0.08 }}
+                    className="flex items-start gap-3"
+                  >
+                    <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-amber flex-shrink-0" />
+                    <p className="text-sm text-ink/65 leading-relaxed">{a}</p>
+                  </motion.li>
+                ))}
+              </ul>
             </div>
           </motion.div>
         </div>
