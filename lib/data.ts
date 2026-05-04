@@ -15,6 +15,7 @@ export const about = {
     cgpa: "8.37",
   },
   achievements: [
+    "Received the Undergraduate Research Award 01 (URA 01), IIT Bombay",
     "Achieved top 1 percentile among 1.2 million students in JEE Mains Examination (2023)",
     "Secured State Rank 314 in Karnataka Common Entrance Test (KCET) out of 0.26 million candidates (2023)",
     "Scored a perfect score of 400/400 in PCMCS in the Karnataka 12th Board Examination (2023)",
@@ -33,25 +34,29 @@ export const experiences = [
   {
     title: "Research Intern",
     organization: "Nanyang Technological University (NTU), Singapore",
-    location: "Singapore",
+    location: "Singapore (Remote)",
     date: "Nov '25 - Present",
-    description: "Working on multi-scale water environment preparation for extracting and standardizing SOAP descriptors across ACN/DMF trajectories.",
+    lab: "DELI Lab",
+    guide: "Prof. Nitish Govindarajan, Chemical Engineering Department, NTU Singapore",
+    description: "Working on multi-scale molecular feature engineering and solvation environment classification for multi-solvent electrolyte systems.",
     achievements: [
-      "Built a unified multi-scale water environment preparation for extracting and standardizing SOAP descriptors",
-      "Implemented unsupervised solvation classifier using experimental PCA + KMeans",
-      "Developed MLP-based chemical potential framework using learned solvation geometries"
+      "Engineered a unified molecular feature pipeline using SOAP descriptors across MD trajectories, producing a structured dataset for multi-solvent comparative analysis",
+      "Trained an unsupervised clustering model on high-dimensional SOAP descriptors to classify distinct solvation environments across ACN/DMF trajectories",
+      "Developing MLIP-based methods to predict water activity in multi-solvent electrolyte mixtures using learned solvation geometries"
     ]
   },
   {
-    title: "Machine Learning Research Intern",
+    title: "Undergraduate Researcher",
     organization: "IIT Bombay",
     location: "Mumbai, India",
     date: "May '25 - Present",
-    description: "Building production-grade ML pipelines for reciprocal-space Gaussian fitting and developing DDAP parameter corridors.",
+    guide: "Prof. Sudarshan Vijay, Chemical Engineering Department",
+    description: "Developing density-derived atomic charge models for long-range electrostatics. Preprint: opt-DDAP (arXiv:2604.10984).",
     achievements: [
-      "Built a production-grade Python DDAP pipeline for reciprocal-space Gaussian fitting",
-      "Identified a robust DDAP parameter corridor through systematic sweeps",
-      "Implemented Ewald-based long-range electrostatics using DDAP-derived atomic charges"
+      "Built a production-grade Python DDAP pipeline for reciprocal-space Gaussian fitting and stable atomic charge extraction from plane-wave DFT densities, achieving accurate density reconstruction on ionic benchmarks (NaCl vacancy supercells, 7–63 atoms)",
+      "Developed opt-DDAP, a differentiable reformulation of DDAP as a PyTorch computational graph, replacing the numerically fragile Lagrange-multiplier solver with a Moore–Penrose pseudoinverse followed by charge renormalisation — maintaining stability up to condition numbers κ(A) > 10¹⁰",
+      "Enabled gradient-based optimisation of Gaussian basis parameters (σ_start, f, g_c) via automatic differentiation, demonstrating robustness to initial conditions with <2% variation in extracted charges across four distinct starting points",
+      "Validated framework on NaCl vacancy supercells and MoS₂ monolayer, including faithful reconstruction of difference charge densities (Δρ = ρ_defect − ρ_bulk), confirming applicability to defect-induced charge redistribution",
     ]
   },
   {
@@ -85,31 +90,60 @@ interface Project {
 
 export const projects: Project[] = [
   {
-    title: "SOAP Descriptors Multi-Scale ML",
+    title: "Solvation Environment Classification for Multi-Solvent Electrolytes",
     slug: "soap-descriptors-ml",
-    description: "Built a unified multi-scale water environment preparation for extracting and standardizing SOAP descriptors across ACN/DMF trajectories, creating a global environment dataset for comparative solvation analysis.",
-    tech: ["Python", "PyTorch", "Scikit-learn", "PCA", "KMeans"],
+    description: "Engineered a unified molecular feature pipeline using SOAP descriptors across MD trajectories to classify distinct solvation environments in ACN/DMF mixtures, with ongoing work on MLIP-based prediction of water activity.",
+    tech: ["Python", "SOAP Descriptors", "PyTorch", "Scikit-learn", "PCA", "KMeans", "MLIPs"],
     date: "Nov '25 - Present",
     category: "Research",
     featured: true,
-    fullDescription: "Built a unified multi-scale water environment preparation for extracting and standardizing SOAP descriptors across ACN/DMF trajectories, creating a global environment dataset for comparative solvation analysis.",
+    fullDescription: "Engineered a unified molecular feature pipeline using SOAP descriptors across MD trajectories, producing a structured dataset for multi-solvent comparative analysis. Trained an unsupervised clustering model on high-dimensional SOAP descriptors to classify distinct solvation environments across ACN/DMF trajectories. Developing MLIP-based methods to predict water activity in multi-solvent electrolyte mixtures using learned solvation geometries. Work conducted at the DELI Lab, NTU Singapore, under Prof. Nitish Govindarajan.",
     images: [],
     videos: [],
     pdfs: []
   },
   {
-    title: "ML Interatomic Potentials with Long-Range Interactions",
+    title: "opt-DDAP: Optimisable Density-Derived Atomic Point Charges",
     slug: "ml-interatomic-potentials",
-    description: "Built a production-grade Python DDAP pipeline for reciprocal-space Gaussian fitting and stable atomic charge extraction. Implemented Ewald-based long-range electrostatics using DDAP-derived atomic charges.",
-    tech: ["Python", "DDAP", "Gaussian Fitting", "Electrostatics"],
+    description: "Developed opt-DDAP, a differentiable PyTorch reformulation of the DDAP method, enabling gradient-based optimisation of Gaussian basis parameters for stable, accurate atomic charge extraction from plane-wave DFT densities.",
+    tech: ["Python", "PyTorch", "DFT", "DDAP", "Ewald Summation", "Automatic Differentiation"],
     date: "May '25 - Present",
     category: "Research",
     featured: true,
-    fullDescription: "Built a production-grade Python DDAP pipeline for reciprocal-space Gaussian fitting and stable atomic charge extraction. Implemented Ewald-based long-range electrostatics using DDAP-derived atomic charges.",
+    fullDescription: "Built a production-grade Python DDAP pipeline for reciprocal-space Gaussian fitting and stable atomic charge extraction from plane-wave DFT densities. Developed opt-DDAP, replacing the numerically fragile Lagrange-multiplier solver with a Moore–Penrose pseudoinverse followed by charge renormalisation, maintaining stability up to condition numbers κ(A) > 10¹⁰. Enabled gradient-based optimisation of Gaussian basis parameters (σ_start, f, g_c) via automatic differentiation, with <2% charge variation across diverse initial conditions. Validated on NaCl vacancy supercells and MoS₂ monolayer, including difference charge density reconstruction. Implemented Ewald-based long-range electrostatics for direct integration with MLIPs. Preprint: arXiv:2604.10984.",
     images: [],
     videos: [],
     pdfs: []
   },
+
+  {
+    title: "PlantWhisper — Multimodal AI for Plant Stress Detection",
+    slug: "plantwhisper",
+    description: "A multimodal AI system that analyzes plant photos to detect stress and synthesizes the acoustic signature the plant would emit — translated to human-audible range, grounded in a 2023 Cell paper on plant bioacoustics.",
+    tech: ["Python", "PyTorch", "MobileNetV2", "FastSAM", "Grad-CAM", "Diffusion Models", "FastAPI", "Next.js", "Groq API", "Docker", "HuggingFace"],
+    date: "2025",
+    category: "Project",
+    featured: true,
+    fullDescription: "PlantWhisper is a multimodal AI system grounded in Khait et al. (2023, Cell), which demonstrated plants emit ultrasonic clicks (20–150 kHz) under stress via xylem cavitation. Given a plant photo, the pipeline runs FastSAM segmentation, fine-tuned MobileNetV2 classification (95.4% accuracy, 38 disease classes), and Grad-CAM explainability heatmaps to produce a 0–100% stress score. A conditional diffusion UNet generates mel spectrograms conditioned on stress level, converted to audio via Griffin-Lim vocoder and pitch-shifted from 53 kHz to human-audible 1 kHz using a validated hump-shaped stress–emission curve. Groq's Llama 3.3 70B generates plant speech from the plant's perspective, voiced via stress-adaptive Edge-TTS. Deployed as a FastAPI + Docker backend, Gradio app on HuggingFace Spaces, and Next.js 15 / Tailwind CSS portfolio on Vercel. ",
+    images: [],
+    videos: [],
+    pdfs: []
+  },
+
+  {
+    title: "DWSIM-Pilot — Claude-Guided Process Simulation via MCP",
+    slug: "dwsim-pilot",
+    description: "An AI-powered chemical process design platform where Claude drives DWSIM simulations through a custom MCP server — taking engineers from a natural language brief to a physics-based process flowsheet in 5 gated stages.",
+    tech: ["Python", "MCP", "FastAPI", "DWSIM", "Next.js", "React", "TypeScript", "Claude API", "Docker", "SSE"],
+    date: "2025",
+    category: "Project",
+    featured: true,
+    fullDescription: "CPD-Pilot is a full-stack chemical process design platform built around a custom Model Context Protocol (MCP) server exposing 25+ specialized tools for Claude integration. The MCP server covers four domains: a process library with 15+ pre-built industrial synthesis routes (ammonia, ethanol, methanol, etc.), NLP-based parameter extraction with automatic unit normalization, web search for novel processes, and a DWSIM integration layer (2,500+ lines) handling compound management, unit operations, stream conditions, thermodynamic model selection (PR, SRK, NRTL), simulation execution, and PNG/SVG flowsheet export via a 3-strategy fallback. Claude guides users through a gated 5-stage workflow — requirements parsing, route selection, thermodynamic model confirmation, block-flow diagram, and DWSIM-generated PFD — with user approval required at each stage. FastAPI backend manages session-based state persistence and real-time SSE streaming; Next.js 14 / React 18 frontend delivers live chat, interactive BFD visualization, and DWSIM flowsheet rendering. Deployed as a Docker Compose stack with health checks and persistent volume management.",
+    images: [],
+    videos: [],
+    pdfs: []
+  },
+
   {
     title: "Physics-Informed Diffusion Models for CT Reconstruction",
     slug: "physics-informed-diffusion-ct",
@@ -136,19 +170,7 @@ export const projects: Project[] = [
     videos: [],
     pdfs: []
   },
-  {
-    title: "RAG-Powered ReAct Agent",
-    slug: "rag-powered-react-agent",
-    description: "Built a LangChain-based ReAct agent with Groq LLMs, integrating Hugging Face embeddings, ChromaDB, and a modular RAG pipeline for semantic retrieval and tool-based control flow.",
-    tech: ["Python", "LangChain", "RAG", "LLMs", "ChromaDB", "Hugging Face"],
-    date: "May '25 - Jun '25",
-    category: "Machine Learning",
-    featured: true,
-    fullDescription: "Built a LangChain-based ReAct agent with Groq LLMs, integrating Hugging Face embeddings, ChromaDB, and a modular RAG pipeline for semantic retrieval and tool-based control flow.",
-    images: [],
-    videos: [],
-    pdfs: []
-  },
+
   {
     title: "DOGGO 1.0 - Quadruped Robot",
     slug: "doggo-quadruped-robot",
@@ -163,31 +185,19 @@ export const projects: Project[] = [
     pdfs: []
   },
   {
-    title: "Stable Diffusion Text-to-Image Generation",
-    slug: "stable-diffusion-text-to-image",
-    description: "Built a complete Stable Diffusion pipeline in PyTorch, implementing core components including variational autoencoder (VAE), U-Net encoder, and CLIP-based text encoder.",
-    tech: ["Python", "PyTorch", "Stable Diffusion", "VAE", "CLIP"],
-    date: "Jan '25",
-    category: "Generative AI",
+    title: "Surgical Organ Segmentation with Uncertainty Estimation",
+    slug: "surgical-organ-segmentation",
+    description: "Course project (CS 736: Medical Image Computing, IIT Bombay) — fine-tuned SegFormer-B0 on the DSAD laparoscopic dataset for multi-organ segmentation across 11 organ classes, with MC-Dropout uncertainty maps and risk-coverage analysis.",
+    tech: ["Python", "PyTorch", "SegFormer", "HuggingFace Transformers", "Albumentations", "OpenCV", "DSAD Dataset"],
+    date: "2025",
+    category: "Project",
     featured: false,
-    fullDescription: "Built a complete Stable Diffusion pipeline in PyTorch, implementing core components including variational autoencoder (VAE), U-Net encoder, and CLIP-based text encoder.",
+    fullDescription: "Course project for CS 736: Medical Image Computing at IIT Bombay. Built a surgical organ segmentation pipeline on the DSAD laparoscopic dataset covering 11 organ classes (liver, pancreas, colon, spleen, ureter, etc.) across binary and multilabel subsets. Fine-tuned SegFormer-B0 (pre-trained on ADE20K) using a combined Dice + Cross-Entropy loss with AdamW optimisation, gradient accumulation, and cosine LR scheduling, tracking per-organ IoU and HD95 on held-out test splits stratified by surgery ID. Implemented a smoke detection preprocessing stage using dark channel prior scoring and CLAHE-based image enhancement. Added MC-Dropout uncertainty estimation with per-pixel entropy maps, temperature scaling calibration (reliability diagrams), and a risk-coverage curve (AURC) to characterise selective prediction behaviour.",
     images: [],
     videos: [],
     pdfs: []
   },
-  {
-    title: "Explainable CNN for Pneumonia Detection",
-    slug: "explainable-cnn-pneumonia",
-    description: "Built a custom CNN with 97% accuracy and 0.978 F1-score on chest X-rays. Applied Grad-CAM to highlight infected regions and generate interpretable clinical insights.",
-    tech: ["Python", "TensorFlow", "CNN", "Grad-CAM", "Medical Imaging"],
-    date: "Apr '25",
-    category: "Computer Vision",
-    featured: false,
-    fullDescription: "Built a custom CNN with 97% accuracy and 0.978 F1-score on chest X-rays. Applied Grad-CAM to highlight infected regions and generate interpretable clinical insights.",
-    images: [],
-    videos: [],
-    pdfs: []
-  },
+
   {
     title: "CNN-LSTM & CNN-Transformer for Remote Sensing",
     slug: "cnn-lstm-transformer-remote-sensing",
@@ -204,16 +214,17 @@ export const projects: Project[] = [
   {
     title: "Custom CNN for Chest X-ray Classification",
     slug: "custom-cnn-chest-xray",
-    description: "Built a custom CNN with 97% accuracy and 0.978 F1-score on chest X-rays using a tailored Keras architecture. Applied Grad-CAM to highlight infected regions.",
+    description: "Course project (DS 303: Introduction to ML, IIT Bombay) — built a custom CNN achieving 97% accuracy and 0.978 F1-score on chest X-rays, with Grad-CAM for infected region localisation.",
     tech: ["Python", "Keras", "CNN", "Grad-CAM"],
     date: "Apr '25",
     category: "Computer Vision",
     featured: false,
-    fullDescription: "Built a custom CNN with 97% accuracy and 0.978 F1-score on chest X-rays using a tailored Keras architecture. Applied Grad-CAM to highlight infected regions.",
+    fullDescription: "Course project for DS 303: Introduction to ML at IIT Bombay. Built a custom CNN achieving 97% accuracy and 0.978 F1-score on chest X-rays using a tailored Keras architecture, with Grad-CAM applied to highlight infected regions.",
     images: [],
     videos: [],
     pdfs: []
   },
+
   {
     title: "Wi-Fi Controlled Quadcopter",
     slug: "wifi-controlled-quadcopter",
