@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-gray-950 text-gray-100;
+    @apply bg-parchment text-ink antialiased;
   }
 
   html {
@@ -12,41 +12,56 @@
   }
 
   * {
-    border-color: rgb(31 41 55);
+    border-color: #E0D9CE;
   }
 }
 
 @layer utilities {
   .text-gradient {
-    @apply bg-gradient-to-r from-primary-400 via-neon-cyan to-neon-pink bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-indigo to-science bg-clip-text text-transparent;
   }
 
+  .text-gradient-warm {
+    @apply bg-gradient-to-r from-indigo via-amber to-rust bg-clip-text text-transparent;
+  }
+
+  /* Paper-slip card: main card style throughout */
+  .paper-card {
+    background: rgba(255, 255, 255, 0.88);
+    border: 1px solid #E0D9CE;
+    box-shadow: 0 2px 14px rgba(28, 28, 46, 0.07), 0 1px 3px rgba(28, 28, 46, 0.04);
+    backdrop-filter: blur(4px);
+  }
+
+  /* Legacy alias used in existing components */
   .glass-effect {
-    @apply bg-gray-900/30 backdrop-blur-md border border-gray-800/50;
+    background: rgba(255, 255, 255, 0.75);
+    border: 1px solid #E0D9CE;
+    box-shadow: 0 2px 8px rgba(28, 28, 46, 0.06);
+    backdrop-filter: blur(8px);
   }
 
-  .glow-purple {
-    box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+  /* Subtle dotted graph-paper grid */
+  .dot-grid {
+    background-image: radial-gradient(circle, rgba(28, 28, 46, 0.09) 1px, transparent 1px);
+    background-size: 22px 22px;
   }
 
-  .glow-cyan {
-    box-shadow: 0 0 20px rgba(6, 182, 212, 0.5);
+  /* Slightly darker parchment for alternating sections */
+  .section-alt {
+    background-color: #EDE8DF;
   }
 
-  .gradient-border {
-    position: relative;
-    background: linear-gradient(180deg, #111827, #0f172a);
+  /* Monospace tag/date style */
+  .tag-mono {
+    font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.03em;
   }
 
-  .gradient-border::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 2px;
-    background: linear-gradient(135deg, #a855f7, #06b6d4);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-  }
+  /* Accent border shorthands */
+  .border-indigo-soft { border-color: rgba(91, 79, 217, 0.25); }
+  .border-science-soft { border-color: rgba(46, 158, 107, 0.25); }
+  .border-amber-soft { border-color: rgba(240, 165, 0, 0.25); }
+  .border-rust-soft { border-color: rgba(176, 90, 47, 0.25); }
 }

@@ -1,241 +1,288 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Github, ExternalLink, Folder, Star } from "lucide-react";
+import { Microscope, Wrench, BookOpen, ExternalLink, ArrowUpRight } from "lucide-react";
 import { projects } from "@/lib/data";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 
-interface GitHubRepo {
-  id: number;
-  name: string;
-  description: string;
-  html_url: string;
-  homepage: string;
-  topics: string[];
-  stargazers_count: number;
-  language: string;
-}
+const researchProjects = projects.filter((p) => p.type === "research");
+const personalProjects = projects.filter((p) => p.type === "personal");
+const courseworkProjects = projects.filter((p) => p.type === "coursework");
+
+const cwCategories = ["All", ...Array.from(new Set(courseworkProjects.map((p) => p.category)))];
 
 export default function Projects() {
-  const [filter, setFilter] = useState<string>("All");
-  const [githubRepos, setGithubRepos] = useState<GitHubRepo[]>([]);
-  const categories = ["All", "Research", "Machine Learning", "Computer Vision", "Robotics", "Generative AI"];
+  const [cwFilter, setCwFilter] = useState("All");
 
-  useEffect(() => {
-    fetchGitHubRepos();
-  }, []);
-
-  const fetchGitHubRepos = async () => {
-    try {
-      const response = await fetch("https://api.github.com/users/Iammohithhh/repos?sort=updated&per_page=6");
-      if (response.ok) {
-        const data = await response.json();
-        setGithubRepos(data);
-      }
-    } catch (error) {
-      console.error("Error fetching GitHub repos:", error);
-    }
-  };
-
-  const filteredProjects = filter === "All"
-    ? projects
-    : projects.filter(project => project.category === filter);
-
-  const featuredProjects = projects.filter(project => project.featured);
+  const filteredCW = cwFilter === "All"
+    ? courseworkProjects
+    : courseworkProjects.filter((p) => p.category === cwFilter);
 
   return (
-    <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 relative">
-      <div className="max-w-7xl mx-auto">
+    <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 section-alt">
+      <div className="max-w-6xl mx-auto space-y-16">
+
+        {/* ── Section header ── */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
+          className="text-center"
         >
-          <h2 className="text-4xl sm:text-5xl font-bold text-center mb-4">
-            Featured <span className="text-gradient">Projects</span>
+          <p className="tag-mono text-indigo/70 uppercase tracking-widest mb-2">Work</p>
+          <h2 className="text-4xl sm:text-5xl font-bold text-ink">
+            Projects & <span className="text-gradient">Research</span>
           </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-primary-600 to-neon-cyan mx-auto mb-8" />
-          <p className="text-center text-gray-400 mb-12 max-w-2xl mx-auto">
-            A showcase of my research work, machine learning projects, and innovative solutions
-          </p>
+          <div className="w-16 h-0.5 bg-gradient-to-r from-indigo to-science mx-auto mt-4" />
         </motion.div>
 
-        {/* Filter Tabs */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-3 mb-12"
+        {/* ── 1. Research Track ── */}
+        <TrackSection
+          icon={<Microscope className="w-4 h-4" />}
+          label="Research"
+          color="text-indigo"
+          badge="bg-indigo-pale text-indigo border border-indigo/20"
+          description="Ongoing research work at IIT Bombay and NTU Singapore."
         >
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setFilter(category)}
-              className={`px-6 py-2 rounded-lg font-medium transition-all duration-300 ${
-                filter === category
-                  ? "bg-primary-600 text-white glow-purple"
-                  : "glass-effect text-gray-400 hover:text-white hover:bg-gray-800/50"
-              }`}
-            >
-              {category}
-            </button>
-          ))}
-        </motion.div>
+          <div className="grid md:grid-cols-2 gap-6">
+            {researchProjects.map((project, i) => (
+              <motion.div
+                key={project.slug}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+              >
+                <Link href={`/projects/${project.slug}`}>
+                  <ResearchCard project={project} />
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </TrackSection>
 
-        {/* Projects Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-          {filteredProjects.map((project, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              <Link href={`/projects/${project.slug}`}>
-                <ProjectCard project={project} />
-              </Link>
-            </motion.div>
-          ))}
-        </div>
+        {/* ── 2. Personal Projects ── */}
+        <TrackSection
+          icon={<Wrench className="w-4 h-4" />}
+          label="Personal Projects"
+          color="text-rust"
+          badge="bg-rust-pale text-rust border border-rust/20"
+          description="Things I built because they seemed too interesting not to."
+        >
+          <div className="grid md:grid-cols-2 gap-6">
+            {personalProjects.map((project, i) => (
+              <motion.div
+                key={project.slug}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+              >
+                <Link href={`/projects/${project.slug}`}>
+                  <PersonalCard project={project} />
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </TrackSection>
 
-        {/* GitHub Repos Section */}
-        {githubRepos.length > 0 && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h3 className="text-3xl font-bold text-center mb-8">
-              Recent <span className="text-gradient">GitHub</span> Activity
-            </h3>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {githubRepos.slice(0, 6).map((repo, index) => (
-                <motion.div
-                  key={repo.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                >
-                  <GitHubRepoCard repo={repo} />
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        )}
+        {/* ── 3. Course Work ── */}
+        <TrackSection
+          icon={<BookOpen className="w-4 h-4" />}
+          label="Course Work & Labs"
+          color="text-science-dark"
+          badge="bg-science-pale text-science-dark border border-science/20"
+          description="Course projects and explorations from IIT Bombay."
+        >
+          {/* Filter tabs */}
+          <div className="flex flex-wrap gap-2 mb-6">
+            {cwCategories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setCwFilter(cat)}
+                className={`px-4 py-1.5 rounded-full text-xs font-semibold tag-mono transition-all duration-200 ${
+                  cwFilter === cat
+                    ? "bg-science-dark text-white shadow-sm"
+                    : "bg-white border border-parchment-darker text-ink/60 hover:border-science/40 hover:text-science-dark"
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {filteredCW.map((project, i) => (
+              <motion.div
+                key={project.slug}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.07 }}
+              >
+                <Link href={`/projects/${project.slug}`}>
+                  <CourseCard project={project} />
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </TrackSection>
+
       </div>
     </section>
   );
 }
 
-function ProjectCard({ project }: { project: typeof projects[0] }) {
+/* ── Track section wrapper ── */
+function TrackSection({ icon, label, color, badge, description, children }: {
+  icon: React.ReactNode; label: string; color: string; badge: string;
+  description: string; children: React.ReactNode;
+}) {
+  return (
+    <div>
+      <div className="flex items-center gap-3 mb-6">
+        <span className={`p-1.5 rounded-md bg-parchment-darker ${color}`}>{icon}</span>
+        <div>
+          <span className={`text-xs font-bold tag-mono px-2.5 py-0.5 rounded-full ${badge}`}>{label}</span>
+          <p className="text-ink/45 text-xs mt-1">{description}</p>
+        </div>
+      </div>
+      {children}
+    </div>
+  );
+}
+
+/* ── Research card: paper/journal style ── */
+function ResearchCard({ project }: { project: typeof projects[0] }) {
   return (
     <motion.div
-      whileHover={{ y: -5 }}
-      className="glass-effect p-6 rounded-xl h-full flex flex-col hover:bg-gray-800/40 transition-all duration-300 group relative overflow-hidden cursor-pointer"
+      whileHover={{ y: -4 }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      className="paper-card p-6 rounded-xl h-full flex flex-col gap-4 cursor-pointer group hover:shadow-lg hover:shadow-indigo/8 transition-shadow duration-300"
     >
-      {/* Gradient Border Effect */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary-600/20 to-neon-cyan/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" />
-
-      <div className="relative z-10">
-        <div className="flex items-start justify-between mb-4">
-          <div className="p-3 bg-primary-600/20 rounded-lg group-hover:bg-primary-600/30 transition-colors">
-            <Folder className="w-6 h-6 text-primary-400" />
-          </div>
-          {project.featured && (
-            <span className="px-3 py-1 bg-neon-cyan/20 text-neon-cyan text-xs font-semibold rounded-full">
-              Featured
-            </span>
+      <div className="flex items-start justify-between gap-2">
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="tag-mono text-xs bg-indigo-pale text-indigo px-2.5 py-0.5 rounded-full">Research</span>
+          {(project as any).institute && (
+            <span className="tag-mono text-xs text-ink/40">{(project as any).institute}</span>
           )}
         </div>
+        {(project as any).arxiv && (
+          <a
+            href={`https://arxiv.org/abs/${(project as any).arxiv}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="shrink-0 tag-mono text-xs bg-amber-pale text-amber-dark px-2.5 py-0.5 rounded-full border border-amber/20 hover:bg-amber/10 transition-colors flex items-center gap-1"
+          >
+            arXiv <ExternalLink className="w-3 h-3" />
+          </a>
+        )}
+      </div>
 
-        <h3 className="text-xl font-bold text-white mb-2 group-hover:text-primary-400 transition-colors">
+      <div>
+        <h3 className="font-bold text-ink text-base leading-snug group-hover:text-indigo transition-colors duration-200 mb-2">
           {project.title}
         </h3>
+        <p className="text-ink/55 text-sm leading-relaxed">{project.description}</p>
+      </div>
 
-        <p className="text-gray-400 text-sm mb-4 leading-relaxed flex-1">
-          {project.description}
-        </p>
-
-        <div className="flex flex-wrap gap-2 mb-4">
-          {project.tech.slice(0, 3).map((tech, idx) => (
-            <span
-              key={idx}
-              className="px-3 py-1 bg-gray-800/50 text-primary-300 text-xs rounded-full"
-            >
-              {tech}
-            </span>
-          ))}
-          {project.tech.length > 3 && (
-            <span className="px-3 py-1 bg-gray-800/50 text-gray-400 text-xs rounded-full">
-              +{project.tech.length - 3} more
-            </span>
-          )}
-        </div>
-
-        <div className="flex items-center justify-between text-sm">
-          <span className="text-gray-500">{project.date}</span>
-          <span className="px-3 py-1 bg-primary-600/20 text-primary-300 text-xs rounded-full">
-            {project.category}
+      <div className="mt-auto flex flex-wrap gap-1.5">
+        {project.tech.slice(0, 4).map((t, i) => (
+          <span key={i} className="tag-mono text-xs bg-parchment-dark text-ink/60 px-2 py-0.5 rounded">
+            {t}
           </span>
-        </div>
+        ))}
+        {project.tech.length > 4 && (
+          <span className="tag-mono text-xs text-ink/35 px-1">+{project.tech.length - 4}</span>
+        )}
+      </div>
+
+      <div className="flex items-center justify-between pt-2 border-t border-parchment-darker">
+        <span className="tag-mono text-xs text-ink/40">{project.date}</span>
+        <span className="text-indigo opacity-0 group-hover:opacity-100 transition-opacity text-xs flex items-center gap-1">
+          View details <ArrowUpRight className="w-3 h-3" />
+        </span>
       </div>
     </motion.div>
   );
 }
 
-function GitHubRepoCard({ repo }: { repo: GitHubRepo }) {
+/* ── Personal project card: richer, feature-forward ── */
+function PersonalCard({ project }: { project: typeof projects[0] }) {
   return (
-    <motion.a
-      href={repo.html_url}
-      target="_blank"
-      rel="noopener noreferrer"
-      whileHover={{ y: -5 }}
-      className="glass-effect p-6 rounded-xl h-full flex flex-col hover:bg-gray-800/40 transition-all duration-300 group"
+    <motion.div
+      whileHover={{ y: -4 }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      className="paper-card p-6 rounded-xl h-full flex flex-col gap-4 cursor-pointer group hover:shadow-lg hover:shadow-rust/8 transition-shadow duration-300 border-l-4 border-l-rust/30 hover:border-l-rust"
     >
-      <div className="flex items-start justify-between mb-4">
-        <div className="p-3 bg-gray-800/50 rounded-lg group-hover:bg-primary-600/20 transition-colors">
-          <Github className="w-6 h-6 text-gray-400 group-hover:text-primary-400 transition-colors" />
-        </div>
-        <div className="flex items-center gap-2">
-          {repo.stargazers_count > 0 && (
-            <div className="flex items-center gap-1 text-sm text-gray-400">
-              <Star className="w-4 h-4" />
-              <span>{repo.stargazers_count}</span>
-            </div>
-          )}
-          <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-primary-400 transition-colors" />
-        </div>
+      <div className="flex items-center gap-2 flex-wrap">
+        <span className="tag-mono text-xs bg-rust-pale text-rust px-2.5 py-0.5 rounded-full border border-rust/20">Personal</span>
+        <span className="tag-mono text-xs text-ink/35">{project.date}</span>
       </div>
 
-      <h3 className="text-lg font-bold text-white mb-2 group-hover:text-primary-400 transition-colors">
-        {repo.name}
-      </h3>
+      <div>
+        <h3 className="font-bold text-ink text-lg leading-snug group-hover:text-rust transition-colors duration-200 mb-2">
+          {project.title}
+        </h3>
+        <p className="text-ink/55 text-sm leading-relaxed">{project.description}</p>
+      </div>
 
-      <p className="text-gray-400 text-sm mb-4 flex-1">
-        {repo.description || "No description available"}
-      </p>
-
-      <div className="flex flex-wrap gap-2">
-        {repo.language && (
-          <span className="px-3 py-1 bg-gray-800/50 text-neon-cyan text-xs rounded-full">
-            {repo.language}
-          </span>
-        )}
-        {repo.topics.slice(0, 2).map((topic, idx) => (
-          <span
-            key={idx}
-            className="px-3 py-1 bg-gray-800/50 text-gray-400 text-xs rounded-full"
-          >
-            {topic}
+      <div className="flex flex-wrap gap-1.5">
+        {project.tech.slice(0, 5).map((t, i) => (
+          <span key={i} className="tag-mono text-xs bg-parchment-dark text-ink/60 px-2 py-0.5 rounded">
+            {t}
           </span>
         ))}
+        {project.tech.length > 5 && (
+          <span className="tag-mono text-xs text-ink/35 px-1">+{project.tech.length - 5}</span>
+        )}
       </div>
-    </motion.a>
+
+      <div className="mt-auto flex items-center justify-end pt-2 border-t border-parchment-darker">
+        <span className="text-rust opacity-0 group-hover:opacity-100 transition-opacity text-xs flex items-center gap-1 font-medium">
+          View project <ArrowUpRight className="w-3 h-3" />
+        </span>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ── Course work card: compact ── */
+function CourseCard({ project }: { project: typeof projects[0] }) {
+  return (
+    <motion.div
+      whileHover={{ y: -3 }}
+      transition={{ type: "spring", stiffness: 300, damping: 22 }}
+      className="paper-card p-5 rounded-xl h-full flex flex-col gap-3 cursor-pointer group hover:shadow-md hover:shadow-science/8 transition-shadow duration-200"
+    >
+      <div className="flex items-center justify-between">
+        <span className="tag-mono text-xs bg-science-pale text-science-dark px-2 py-0.5 rounded-full border border-science/20">
+          {project.category}
+        </span>
+        <span className="tag-mono text-xs text-ink/35">{project.date}</span>
+      </div>
+
+      <h3 className="font-semibold text-ink text-sm leading-snug group-hover:text-science-dark transition-colors duration-200">
+        {project.title}
+      </h3>
+
+      <p className="text-ink/50 text-xs leading-relaxed flex-1 line-clamp-3">
+        {project.description}
+      </p>
+
+      <div className="flex flex-wrap gap-1">
+        {project.tech.slice(0, 3).map((t, i) => (
+          <span key={i} className="tag-mono text-xs bg-parchment-dark text-ink/50 px-1.5 py-0.5 rounded">
+            {t}
+          </span>
+        ))}
+        {project.tech.length > 3 && (
+          <span className="tag-mono text-xs text-ink/30">+{project.tech.length - 3}</span>
+        )}
+      </div>
+    </motion.div>
   );
 }

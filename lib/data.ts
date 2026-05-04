@@ -3,7 +3,7 @@ export const personalInfo = {
   email: "mohithiitb@gmail.com",
   github: "https://github.com/Iammohithhh",
   linkedin: "https://www.linkedin.com/in/mohith-h-855667224",
-  resume: "#", // Add resume link if available
+  resume: "#",
 };
 
 export const about = {
@@ -81,11 +81,14 @@ interface Project {
   tech: string[];
   date: string;
   category: string;
+  type: "research" | "personal" | "coursework";
   featured: boolean;
   fullDescription: string;
   images: string[];
   videos: string[];
   pdfs: string[];
+  arxiv?: string;
+  institute?: string;
 }
 
 export const projects: Project[] = [
@@ -96,7 +99,9 @@ export const projects: Project[] = [
     tech: ["Python", "SOAP Descriptors", "PyTorch", "Scikit-learn", "PCA", "KMeans", "MLIPs"],
     date: "Nov '25 - Present",
     category: "Research",
+    type: "research",
     featured: true,
+    institute: "DELI Lab, NTU Singapore",
     fullDescription: "Engineered a unified molecular feature pipeline using SOAP descriptors across MD trajectories, producing a structured dataset for multi-solvent comparative analysis. Trained an unsupervised clustering model on high-dimensional SOAP descriptors to classify distinct solvation environments across ACN/DMF trajectories. Developing MLIP-based methods to predict water activity in multi-solvent electrolyte mixtures using learned solvation geometries. Work conducted at the DELI Lab, NTU Singapore, under Prof. Nitish Govindarajan.",
     images: [],
     videos: [],
@@ -109,13 +114,15 @@ export const projects: Project[] = [
     tech: ["Python", "PyTorch", "DFT", "DDAP", "Ewald Summation", "Automatic Differentiation"],
     date: "May '25 - Present",
     category: "Research",
+    type: "research",
     featured: true,
+    institute: "IIT Bombay",
+    arxiv: "2604.10984",
     fullDescription: "Built a production-grade Python DDAP pipeline for reciprocal-space Gaussian fitting and stable atomic charge extraction from plane-wave DFT densities. Developed opt-DDAP, replacing the numerically fragile Lagrange-multiplier solver with a Moore–Penrose pseudoinverse followed by charge renormalisation, maintaining stability up to condition numbers κ(A) > 10¹⁰. Enabled gradient-based optimisation of Gaussian basis parameters (σ_start, f, g_c) via automatic differentiation, with <2% charge variation across diverse initial conditions. Validated on NaCl vacancy supercells and MoS₂ monolayer, including difference charge density reconstruction. Implemented Ewald-based long-range electrostatics for direct integration with MLIPs. Preprint: arXiv:2604.10984.",
     images: [],
     videos: [],
     pdfs: []
   },
-
   {
     title: "PlantWhisper — Multimodal AI for Plant Stress Detection",
     slug: "plantwhisper",
@@ -123,13 +130,13 @@ export const projects: Project[] = [
     tech: ["Python", "PyTorch", "MobileNetV2", "FastSAM", "Grad-CAM", "Diffusion Models", "FastAPI", "Next.js", "Groq API", "Docker", "HuggingFace"],
     date: "2025",
     category: "Project",
+    type: "personal",
     featured: true,
-    fullDescription: "PlantWhisper is a multimodal AI system grounded in Khait et al. (2023, Cell), which demonstrated plants emit ultrasonic clicks (20–150 kHz) under stress via xylem cavitation. Given a plant photo, the pipeline runs FastSAM segmentation, fine-tuned MobileNetV2 classification (95.4% accuracy, 38 disease classes), and Grad-CAM explainability heatmaps to produce a 0–100% stress score. A conditional diffusion UNet generates mel spectrograms conditioned on stress level, converted to audio via Griffin-Lim vocoder and pitch-shifted from 53 kHz to human-audible 1 kHz using a validated hump-shaped stress–emission curve. Groq's Llama 3.3 70B generates plant speech from the plant's perspective, voiced via stress-adaptive Edge-TTS. Deployed as a FastAPI + Docker backend, Gradio app on HuggingFace Spaces, and Next.js 15 / Tailwind CSS portfolio on Vercel. ",
+    fullDescription: "PlantWhisper is a multimodal AI system grounded in Khait et al. (2023, Cell), which demonstrated plants emit ultrasonic clicks (20–150 kHz) under stress via xylem cavitation. Given a plant photo, the pipeline runs FastSAM segmentation, fine-tuned MobileNetV2 classification (95.4% accuracy, 38 disease classes), and Grad-CAM explainability heatmaps to produce a 0–100% stress score. A conditional diffusion UNet generates mel spectrograms conditioned on stress level, converted to audio via Griffin-Lim vocoder and pitch-shifted from 53 kHz to human-audible 1 kHz using a validated hump-shaped stress–emission curve. Groq's Llama 3.3 70B generates plant speech from the plant's perspective, voiced via stress-adaptive Edge-TTS. Deployed as a FastAPI + Docker backend, Gradio app on HuggingFace Spaces, and Next.js 15 / Tailwind CSS portfolio on Vercel.",
     images: [],
     videos: [],
     pdfs: []
   },
-
   {
     title: "DWSIM-Pilot — Claude-Guided Process Simulation via MCP",
     slug: "dwsim-pilot",
@@ -137,13 +144,13 @@ export const projects: Project[] = [
     tech: ["Python", "MCP", "FastAPI", "DWSIM", "Next.js", "React", "TypeScript", "Claude API", "Docker", "SSE"],
     date: "2025",
     category: "Project",
+    type: "personal",
     featured: true,
     fullDescription: "CPD-Pilot is a full-stack chemical process design platform built around a custom Model Context Protocol (MCP) server exposing 25+ specialized tools for Claude integration. The MCP server covers four domains: a process library with 15+ pre-built industrial synthesis routes (ammonia, ethanol, methanol, etc.), NLP-based parameter extraction with automatic unit normalization, web search for novel processes, and a DWSIM integration layer (2,500+ lines) handling compound management, unit operations, stream conditions, thermodynamic model selection (PR, SRK, NRTL), simulation execution, and PNG/SVG flowsheet export via a 3-strategy fallback. Claude guides users through a gated 5-stage workflow — requirements parsing, route selection, thermodynamic model confirmation, block-flow diagram, and DWSIM-generated PFD — with user approval required at each stage. FastAPI backend manages session-based state persistence and real-time SSE streaming; Next.js 14 / React 18 frontend delivers live chat, interactive BFD visualization, and DWSIM flowsheet rendering. Deployed as a Docker Compose stack with health checks and persistent volume management.",
     images: [],
     videos: [],
     pdfs: []
   },
-
   {
     title: "Physics-Informed Diffusion Models for CT Reconstruction",
     slug: "physics-informed-diffusion-ct",
@@ -151,7 +158,8 @@ export const projects: Project[] = [
     tech: ["Python", "PyTorch", "PINN", "Diffusion Models", "Medical Imaging"],
     date: "Sep '25 - Present",
     category: "Machine Learning",
-    featured: true,
+    type: "coursework",
+    featured: false,
     fullDescription: "Adapted the PINN-DaDiff framework from MRI to CT by replacing Fourier-domain physics with fully differentiable Radon transform. Built a four-stage physics-informed generative pipeline for X-ray photon statistics.",
     images: [],
     videos: [],
@@ -164,21 +172,22 @@ export const projects: Project[] = [
     tech: ["Python", "DeepFace", "MediaPipe", "Whisper", "TTS", "Computer Vision"],
     date: "Sep '25",
     category: "Computer Vision",
-    featured: true,
+    type: "coursework",
+    featured: false,
     fullDescription: "Developed an AI guard agent with DeepFace, MediaPipe, Whisper, and TTS for real-time monitoring. Designed guard-level user enrollment and command activation to deter unwanted access.",
     images: [],
     videos: [],
     pdfs: []
   },
-
   {
-    title: "DOGGO 1.0 - Quadruped Robot",
+    title: "DOGGO 1.0 — Quadruped Robot",
     slug: "doggo-quadruped-robot",
     description: "Designed the mechanical structure of the bot using SolidWorks and simulated the environment in Gazebo Fortress. Integrated ROS 2 with Python and implemented 2-DOF leg motion for stable gait generation using Inverse Kinematics.",
     tech: ["Python", "ROS 2", "Gazebo", "SolidWorks", "Inverse Kinematics", "Arduino"],
     date: "Jan '25 - Apr '25",
     category: "Robotics",
-    featured: true,
+    type: "coursework",
+    featured: false,
     fullDescription: "Designed the mechanical structure of the bot using SolidWorks and simulated the environment in Gazebo Fortress. Integrated ROS 2 with Python and implemented 2-DOF leg motion for stable gait generation using Inverse Kinematics.",
     images: [],
     videos: [],
@@ -187,17 +196,17 @@ export const projects: Project[] = [
   {
     title: "Surgical Organ Segmentation with Uncertainty Estimation",
     slug: "surgical-organ-segmentation",
-    description: "Course project (CS 736: Medical Image Computing, IIT Bombay) — fine-tuned SegFormer-B0 on the DSAD laparoscopic dataset for multi-organ segmentation across 11 organ classes, with MC-Dropout uncertainty maps and risk-coverage analysis.",
-    tech: ["Python", "PyTorch", "SegFormer", "HuggingFace Transformers", "Albumentations", "OpenCV", "DSAD Dataset"],
+    description: "CS 736 · IIT Bombay — fine-tuned SegFormer-B0 on the DSAD laparoscopic dataset for multi-organ segmentation across 11 organ classes, with MC-Dropout uncertainty maps and risk-coverage analysis.",
+    tech: ["Python", "PyTorch", "SegFormer", "HuggingFace Transformers", "Albumentations", "OpenCV"],
     date: "2025",
-    category: "Project",
+    category: "Computer Vision",
+    type: "coursework",
     featured: false,
     fullDescription: "Course project for CS 736: Medical Image Computing at IIT Bombay. Built a surgical organ segmentation pipeline on the DSAD laparoscopic dataset covering 11 organ classes (liver, pancreas, colon, spleen, ureter, etc.) across binary and multilabel subsets. Fine-tuned SegFormer-B0 (pre-trained on ADE20K) using a combined Dice + Cross-Entropy loss with AdamW optimisation, gradient accumulation, and cosine LR scheduling, tracking per-organ IoU and HD95 on held-out test splits stratified by surgery ID. Implemented a smoke detection preprocessing stage using dark channel prior scoring and CLAHE-based image enhancement. Added MC-Dropout uncertainty estimation with per-pixel entropy maps, temperature scaling calibration (reliability diagrams), and a risk-coverage curve (AURC) to characterise selective prediction behaviour.",
     images: [],
     videos: [],
     pdfs: []
   },
-
   {
     title: "CNN-LSTM & CNN-Transformer for Remote Sensing",
     slug: "cnn-lstm-transformer-remote-sensing",
@@ -205,6 +214,7 @@ export const projects: Project[] = [
     tech: ["Python", "TensorFlow", "CNN", "LSTM", "Transformer", "ResNet"],
     date: "Aug '25",
     category: "Computer Vision",
+    type: "coursework",
     featured: false,
     fullDescription: "Implemented CNN-LSTM and CNN-Transformer architectures for automated captioning of satellite images. Experimented with ResNet, MobileNetV2, InceptionV3 for feature extraction.",
     images: [],
@@ -214,17 +224,17 @@ export const projects: Project[] = [
   {
     title: "Custom CNN for Chest X-ray Classification",
     slug: "custom-cnn-chest-xray",
-    description: "Course project (DS 303: Introduction to ML, IIT Bombay) — built a custom CNN achieving 97% accuracy and 0.978 F1-score on chest X-rays, with Grad-CAM for infected region localisation.",
+    description: "DS 303 · IIT Bombay — built a custom CNN achieving 97% accuracy and 0.978 F1-score on chest X-rays, with Grad-CAM for infected region localisation.",
     tech: ["Python", "Keras", "CNN", "Grad-CAM"],
     date: "Apr '25",
     category: "Computer Vision",
+    type: "coursework",
     featured: false,
     fullDescription: "Course project for DS 303: Introduction to ML at IIT Bombay. Built a custom CNN achieving 97% accuracy and 0.978 F1-score on chest X-rays using a tailored Keras architecture, with Grad-CAM applied to highlight infected regions.",
     images: [],
     videos: [],
     pdfs: []
   },
-
   {
     title: "Wi-Fi Controlled Quadcopter",
     slug: "wifi-controlled-quadcopter",
@@ -232,11 +242,27 @@ export const projects: Project[] = [
     tech: ["Arduino", "NodeMCU", "MPU 6050", "RemoteXY", "C++"],
     date: "Jan '24 - Apr '24",
     category: "Robotics",
+    type: "coursework",
     featured: false,
     fullDescription: "Coordinated a team of 16 to assemble a quadcopter achieving a record flight of 120+ seconds. Integrated lightweight, durable components with Arduino, MPU 6050, and NodeMCU.",
     images: [],
     videos: [],
     pdfs: []
+  }
+];
+
+export const publications = [
+  {
+    title: "opt-DDAP: Optimisable Density-Derived Atomic Point Charges",
+    authors: "Mohith H, Sudarshan Vijay",
+    venue: "arXiv preprint",
+    year: "2025",
+    arxivId: "2604.10984",
+    abstract: "We present opt-DDAP, a differentiable reformulation of the Density-Derived Atomic Point charge (DDAP) method as a PyTorch computational graph. By replacing the numerically fragile Lagrange-multiplier solver with a Moore–Penrose pseudoinverse followed by charge renormalisation, opt-DDAP maintains numerical stability up to condition numbers κ(A) > 10¹⁰. Gradient-based optimisation of Gaussian basis parameters (σ_start, f, g_c) is enabled via automatic differentiation, demonstrating robustness to initial conditions with <2% variation in extracted charges across four distinct starting points. Validated on NaCl vacancy supercells and MoS₂ monolayer with faithful reconstruction of difference charge densities.",
+    tags: ["ML Interatomic Potentials", "DFT", "Atomic Charges", "PyTorch", "Automatic Differentiation"],
+    url: "https://arxiv.org/abs/2604.10984",
+    pdfUrl: "https://arxiv.org/pdf/2604.10984",
+    institute: "IIT Bombay",
   }
 ];
 
@@ -284,7 +310,6 @@ export const hobbies = [
       "/hobbies/sky-pictures/sky7.jpeg",
       "/hobbies/sky-pictures/sky8.jpeg",
       "/hobbies/sky-pictures/sky9.jpeg"
-
     ]
   }
 ];
