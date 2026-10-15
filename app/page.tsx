@@ -12,7 +12,6 @@ import {
   imageFor,
   interests,
   intro,
-  motto,
   news,
   personalInfo,
   projects,
@@ -57,7 +56,6 @@ export default function Home() {
               {personalInfo.role}
             </p>
             <h1 className="mt-4 text-4xl font-semibold tracking-tight md:text-5xl">{personalInfo.name}</h1>
-            <p className="mt-2 font-serif text-lg italic text-ink-muted">{motto}</p>
             <div className="mt-5 max-w-prose space-y-4">
               {intro.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>

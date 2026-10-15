@@ -11,7 +11,7 @@ export const site = {
 
 export const personalInfo = {
   name: "Mohith H",
-  role: "Undergraduate researcher · Chemical Engineering, IIT Bombay",
+  role: "Chemical Engineering · IIT Bombay",
   email: "mohithiitb@gmail.com",
   github: "https://github.com/Iammohithhh",
   linkedin: "https://www.linkedin.com/in/mohith-h-855667224",
@@ -22,11 +22,9 @@ export const personalInfo = {
 };
 
 export const intro = [
-  "I'm a Chemical Engineering undergraduate at IIT Bombay working on machine learning interatomic potentials, long-range electrostatics and differentiable scientific computing. For my undergraduate thesis, I'm studying which electrostatic information from DFT long-range ML potentials need to describe metal/water interfaces correctly.",
-  "My earlier work, published in the Journal of Chemical Theory and Computation, made density-derived atomic charges differentiable. I've also predicted water activity in organic–water electrolytes from MD simulations at NTU Singapore, and added plane-wave DFT to Physika, a differentiable programming language, at Deep Forest Sciences.",
+  "I'm drawn to the space where physics meets machine learning: teaching models to respect the physics of atoms and molecules, and making simulations fast and accurate enough to answer real chemical questions.",
+  "I like understanding a problem from first principles and then building the tools to explore it, from simulation pipelines and differentiable code to the occasional robot.",
 ];
-
-export const motto = "Molecules → Models → Products";
 
 export const researchInterests = [
   "AI for science",
