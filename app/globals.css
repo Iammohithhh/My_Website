@@ -3,65 +3,44 @@
 @tailwind utilities;
 
 @layer base {
-  body {
-    @apply bg-parchment text-ink antialiased;
-  }
-
   html {
-    scroll-behavior: smooth;
+    font-size: 17px;
   }
 
-  * {
-    border-color: #E0D9CE;
+  @media (min-width: 768px) {
+    html {
+      font-size: 18px;
+    }
+  }
+
+  body {
+    @apply bg-paper text-ink font-sans antialiased leading-relaxed;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-serif text-ink;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-accent;
   }
 }
 
-@layer utilities {
-  .text-gradient {
-    @apply bg-gradient-to-r from-indigo to-science bg-clip-text text-transparent;
+@layer components {
+  /* Plain text link with an accent underline */
+  .link {
+    @apply text-accent underline decoration-accent/30 underline-offset-[3px] transition-colors hover:text-accent-dark hover:decoration-accent;
   }
 
-  .text-gradient-warm {
-    @apply bg-gradient-to-r from-indigo via-amber to-rust bg-clip-text text-transparent;
+  /* Section heading used on every page */
+  .section-title {
+    @apply font-serif text-2xl font-semibold text-ink mb-6;
   }
 
-  /* Paper-slip card: main card style throughout */
-  .paper-card {
-    background: rgba(255, 255, 255, 0.88);
-    border: 1px solid #E0D9CE;
-    box-shadow: 0 2px 14px rgba(28, 28, 46, 0.07), 0 1px 3px rgba(28, 28, 46, 0.04);
-    backdrop-filter: blur(4px);
+  /* Small grey metadata line (venue, dates, lab) */
+  .meta {
+    @apply text-sm text-ink-muted;
   }
-
-  /* Legacy alias used in existing components */
-  .glass-effect {
-    background: rgba(255, 255, 255, 0.75);
-    border: 1px solid #E0D9CE;
-    box-shadow: 0 2px 8px rgba(28, 28, 46, 0.06);
-    backdrop-filter: blur(8px);
-  }
-
-  /* Subtle dotted graph-paper grid */
-  .dot-grid {
-    background-image: radial-gradient(circle, rgba(28, 28, 46, 0.09) 1px, transparent 1px);
-    background-size: 22px 22px;
-  }
-
-  /* Slightly darker parchment for alternating sections */
-  .section-alt {
-    background-color: #EDE8DF;
-  }
-
-  /* Monospace tag/date style */
-  .tag-mono {
-    font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.03em;
-  }
-
-  /* Accent border shorthands */
-  .border-indigo-soft { border-color: rgba(91, 79, 217, 0.25); }
-  .border-science-soft { border-color: rgba(46, 158, 107, 0.25); }
-  .border-amber-soft { border-color: rgba(240, 165, 0, 0.25); }
-  .border-rust-soft { border-color: rgba(176, 90, 47, 0.25); }
 }

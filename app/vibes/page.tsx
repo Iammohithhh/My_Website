@@ -1,15 +1,11 @@
+import type { Metadata } from "next";
 import Vibes from "@/components/Vibes";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
+
+export const metadata: Metadata = {
+  title: "Vibes",
+  description: "What Mohith H has been listening to on Spotify.",
+};
 
 export default function VibesPage() {
-  return (
-    <main className="min-h-screen bg-gray-950">
-      <Navigation />
-      <div className="pt-24">
-        <Vibes />
-      </div>
-      <Footer />
-    </main>
-  );
+  return <Vibes />;
 }

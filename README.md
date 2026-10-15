@@ -1,106 +1,55 @@
-# Mohith H - Portfolio Website
+# Mohith H — personal website
 
-A modern, interactive portfolio website built with Next.js, React, TypeScript, Tailwind CSS, and Framer Motion.
+Source for [mohith-h.vercel.app](https://mohith-h.vercel.app): research, publications and writing. Built with Next.js and Tailwind CSS and deployed on Vercel; every push to `main` deploys automatically.
 
-## 🚀 Features
+## Run it locally
 
-- **Dark Theme by Default** - Premium dark mode with neon purple accents
-- **Fully Responsive** - Optimized for all screen sizes
-- **Smooth Animations** - Powered by Framer Motion
-- **Interactive UI** - Hover effects, parallax scrolling, and micro-interactions
-- **GitHub Integration** - Auto-fetch latest repositories
-- **Contact Form** - Get in touch directly through the website
-- **Performance Optimized** - Fast loading and smooth scrolling
-
-## 🛠️ Tech Stack
-
-- **Framework:** Next.js 16
-- **Language:** TypeScript
-- **Styling:** Tailwind CSS
-- **Animations:** Framer Motion
-- **Icons:** Lucide React
-- **Fonts:** Inter & Space Grotesk
-
-## 📦 Installation
-
-1. Clone the repository:
-```bash
-git clone https://github.com/Iammohithhh/mohith.git
-cd portfolio-nextjs
-```
-
-2. Install dependencies:
 ```bash
 npm install
+npm run dev        # http://localhost:3000, drafts visible
+npm run build      # production build, drafts hidden
 ```
 
-3. Run the development server:
-```bash
-npm run dev
+## Where things live
+
+| What | Where |
+| --- | --- |
+| Intro, publications, research, projects, experience, awards, interests | `lib/data.ts` |
+| Blog posts | `content/writing/*.md` |
+| Images for posts | `public/writing/<post-name>/` |
+| Research figures | `public/research/`, referenced from `figure` in `lib/data.ts` |
+| CV | `public/cv.pdf` (the CV link appears once this file exists) |
+| Profile photo | `public/profile.jpeg` |
+
+Publications are defined once in `lib/data.ts` and reused by the homepage, the Research page and each research page.
+
+## Writing a post
+
+1. Copy `content/writing/example-post.md` to `content/writing/<post-name>.md`. The file name becomes the URL (`/writing/<post-name>`), so don't rename it after publishing.
+2. Edit the front matter:
+
+   ```yaml
+   ---
+   title: "Why differentiability helps charge partitioning"
+   description: "One or two sentences for the post list and RSS feed."
+   date: 2026-11-01
+   updated: 2026-11-10   # optional
+   tags: [research-note]
+   draft: true           # remove or set to false to publish
+   ---
+   ```
+
+3. Preview with `npm run dev`. Drafts are labelled and never appear in production or the feed.
+4. Commit and push; Vercel deploys it.
+
+Supported: `$inline$` and `$$display$$` maths (KaTeX), fenced code with syntax highlighting, GitHub tables, footnotes (`[^1]`), and captioned figures:
+
+```markdown
+![Alt text for screen readers](/writing/my-post/plot.png "Figure 1. Caption shown under the image.")
 ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+The **Writing** menu item, the homepage "Recent writing" section and the RSS feed (`/writing/rss.xml`) appear once at least one post is published.
 
-## 🏗️ Build
+## Spotify (`/vibes`)
 
-To build for production:
-
-```bash
-npm run build
-npm start
-```
-
-## 📂 Project Structure
-
-```
-portfolio-nextjs/
-├── app/
-│   ├── globals.css       # Global styles and Tailwind directives
-│   ├── layout.tsx        # Root layout component
-│   └── page.tsx          # Main page
-├── components/
-│   ├── Hero.tsx          # Hero section with animated intro
-│   ├── About.tsx         # About section
-│   ├── Projects.tsx      # Projects showcase with GitHub integration
-│   ├── Skills.tsx        # Skills with glowing effects
-│   ├── Experience.tsx    # Timeline of experiences
-│   ├── Hobbies.tsx       # Interactive hobby cards
-│   ├── Contact.tsx       # Contact form and social links
-│   ├── Navigation.tsx    # Navigation bar
-│   └── Footer.tsx        # Footer component
-├── lib/
-│   └── data.ts           # Portfolio data and content
-└── public/               # Static assets
-```
-
-## 🎨 Customization
-
-Edit the data in `lib/data.ts` to customize:
-- Personal information
-- Projects
-- Skills
-- Experience
-- Achievements
-- Hobbies
-
-## 🌐 Deployment
-
-This project is ready to deploy on Vercel:
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new)
-
-Or deploy on any other platform that supports Next.js.
-
-## 📄 License
-
-MIT License - feel free to use this template for your own portfolio!
-
-## 🤝 Connect
-
-- **Email:** mohithiitb@gmail.com
-- **LinkedIn:** [Mohith H](https://www.linkedin.com/in/mohith-h-855667224)
-- **GitHub:** [@Iammohithhh](https://github.com/Iammohithhh)
-
----
-
-Built with ❤️ by Mohith H
+The Vibes page reads `SPOTIFY_CLIENT_ID`, `SPOTIFY_CLIENT_SECRET` and `SPOTIFY_REFRESH_TOKEN`. Set them in Vercel → Project → Settings → Environment Variables, and locally in `.env.local`, which is git-ignored and must never be committed.

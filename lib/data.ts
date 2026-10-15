@@ -1,315 +1,540 @@
+// All site content lives here. Edit this file to update the website;
+// blog posts live separately in content/writing/*.md.
+
+export const site = {
+  name: "Mohith H",
+  title: "Mohith H — ML for atomistic simulation",
+  description:
+    "Chemical Engineering undergraduate at IIT Bombay working on machine learning interatomic potentials, long-range electrostatics and differentiable scientific computing.",
+  url: "https://mohith-h.vercel.app",
+};
+
 export const personalInfo = {
   name: "Mohith H",
+  role: "Undergraduate researcher · Chemical Engineering, IIT Bombay",
   email: "mohithiitb@gmail.com",
   github: "https://github.com/Iammohithhh",
   linkedin: "https://www.linkedin.com/in/mohith-h-855667224",
-  resume: "#",
+  // Paste your Google Scholar profile URL here; the link is hidden while empty.
+  scholar: "",
+  // Put your CV at public/cv.pdf; the CV link appears automatically once the file exists.
+  cv: "/cv.pdf",
 };
 
-export const about = {
-  bio: "Chemical Engineering student at IIT Bombay with a passion for Machine Learning and AI research. Currently pursuing a Minor in Artificial Intelligence and Data Science from the C-MInDS Department. I specialize in developing physics-informed ML models, computer vision applications, and advanced deep learning systems.",
-  education: {
-    degree: "B.Tech. in Chemical Engineering",
-    institution: "Indian Institute of Technology Bombay",
-    year: "2023 - 2027",
-    cgpa: "8.37",
-  },
-  achievements: [
-    "Received the Undergraduate Research Award 01 (URA 01), IIT Bombay",
-    "Achieved top 1 percentile among 1.2 million students in JEE Mains Examination (2023)",
-    "Secured State Rank 314 in Karnataka Common Entrance Test (KCET) out of 0.26 million candidates (2023)",
-    "Scored a perfect score of 400/400 in PCMCS in the Karnataka 12th Board Examination (2023)",
-    "Secured Zonal Rank 240 in SOF International Mathematics Olympiad Exam out of 4000+ students (2019)"
-  ]
-};
-
-export const skills = {
-  "Programming Languages": ["Python", "C++", "JavaScript", "TypeScript", "HTML", "Bash", "LaTeX"],
-  "ML/AI Frameworks": ["PyTorch", "TensorFlow", "Scikit-learn", "Qiskit", "Pandas", "NumPy"],
-  "Tools & Software": ["Git", "ROS", "Gazebo", "Arduino", "SolidWorks", "AutoCAD P&ID", "Fusion360", "Matplotlib"],
-  "Databases": ["MySQL"]
-};
-
-export const experiences = [
-  {
-    title: "Research Intern",
-    organization: "Nanyang Technological University (NTU), Singapore",
-    location: "Singapore (Remote)",
-    date: "Nov '25 - Present",
-    lab: "DELI Lab",
-    guide: "Prof. Nitish Govindarajan, Chemical Engineering Department, NTU Singapore",
-    description: "Working on multi-scale molecular feature engineering and solvation environment classification for multi-solvent electrolyte systems.",
-    achievements: [
-      "Engineered a unified molecular feature pipeline using SOAP descriptors across MD trajectories, producing a structured dataset for multi-solvent comparative analysis",
-      "Trained an unsupervised clustering model on high-dimensional SOAP descriptors to classify distinct solvation environments across ACN/DMF trajectories",
-      "Developing MLIP-based methods to predict water activity in multi-solvent electrolyte mixtures using learned solvation geometries"
-    ]
-  },
-  {
-    title: "Undergraduate Researcher",
-    organization: "IIT Bombay",
-    location: "Mumbai, India",
-    date: "May '25 - Present",
-    guide: "Prof. Sudarshan Vijay, Chemical Engineering Department",
-    description: "Developing density-derived atomic charge models for long-range electrostatics. Preprint: opt-DDAP (arXiv:2604.10984).",
-    achievements: [
-      "Built a production-grade Python DDAP pipeline for reciprocal-space Gaussian fitting and stable atomic charge extraction from plane-wave DFT densities, achieving accurate density reconstruction on ionic benchmarks (NaCl vacancy supercells, 7–63 atoms)",
-      "Developed opt-DDAP, a differentiable reformulation of DDAP as a PyTorch computational graph, replacing the numerically fragile Lagrange-multiplier solver with a Moore–Penrose pseudoinverse followed by charge renormalisation — maintaining stability up to condition numbers κ(A) > 10¹⁰",
-      "Enabled gradient-based optimisation of Gaussian basis parameters (σ_start, f, g_c) via automatic differentiation, demonstrating robustness to initial conditions with <2% variation in extracted charges across four distinct starting points",
-      "Validated framework on NaCl vacancy supercells and MoS₂ monolayer, including faithful reconstruction of difference charge densities (Δρ = ρ_defect − ρ_bulk), confirming applicability to defect-induced charge redistribution",
-    ]
-  },
-  {
-    title: "Junior Controls Engineer",
-    organization: "Team ChemEca, IIT Bombay",
-    location: "Mumbai, India",
-    date: "Oct '24 - Apr '25",
-    description: "Led chemical engineering innovations on net-zero solutions and sustainability projects.",
-    achievements: [
-      "Completed 2-week trainee program on chemical engineering concepts and sustainability",
-      "Participated in Chem-E-Car Challenge 2025 and ChemE Cube Competition",
-      "Designed complete lab-scale Direct Air Capture (DAC) pilot plant",
-      "Performed detailed HAZOP analysis and proposed safety controls"
-    ]
-  }
+export const intro = [
+  "I'm a Chemical Engineering undergraduate at IIT Bombay working on machine learning interatomic potentials, long-range electrostatics and differentiable scientific computing. For my undergraduate thesis, I'm studying which electrostatic information from DFT long-range ML potentials need to describe metal/water interfaces correctly.",
+  "My earlier work, published in the Journal of Chemical Theory and Computation, made density-derived atomic charges differentiable. I've also predicted water activity in organic–water electrolytes from MD simulations at NTU Singapore, and added plane-wave DFT to Physika, a differentiable programming language, at Deep Forest Sciences.",
 ];
 
-interface Project {
+export const motto = "Molecules → Models → Products";
+
+// ---------------------------------------------------------------------------
+// Publications — the single source for papers. Research entries refer to them by id.
+// ---------------------------------------------------------------------------
+
+export interface Publication {
+  id: string;
   title: string;
+  authors: string[];
+  venue: string;
+  year: number;
+  details?: string;
+  doi?: string;
+  arxiv?: string;
+  code?: string;
+}
+
+export const publications: Publication[] = [
+  {
+    id: "opt-ddap",
+    title: "opt-DDAP: Optimizable Density-Derived Atomic Point Charges via Automatic Differentiation",
+    authors: ["Mohith H", "Sudarshan Vijay"],
+    venue: "Journal of Chemical Theory and Computation",
+    year: 2026,
+    details: "22(14), 7362–7369",
+    doi: "10.1021/acs.jctc.6c00727",
+    arxiv: "2604.10984",
+  },
+];
+
+export function publicationLinks(pub: Publication) {
+  const links: { label: string; href: string }[] = [];
+  if (pub.doi) links.push({ label: "Paper", href: `https://doi.org/${pub.doi}` });
+  if (pub.arxiv) links.push({ label: "arXiv", href: `https://arxiv.org/abs/${pub.arxiv}` });
+  if (pub.code) links.push({ label: "Code", href: pub.code });
+  return links;
+}
+
+// ---------------------------------------------------------------------------
+// Research — selected projects, each answering: what problem, what I did,
+// what evidence supports it, what remains open, and where the outputs are.
+// ---------------------------------------------------------------------------
+
+export interface Figure {
+  src: string;
+  alt: string;
+  caption: string;
+}
+
+export interface ResearchProject {
   slug: string;
-  description: string;
-  tech: string[];
+  title: string;
+  status: string;
+  period: string;
+  place: string;
+  advisor: string;
+  summary: string;
+  problem: string;
+  contribution: string[];
+  evidence: string[];
+  // Open questions and known limitations; the section is hidden while empty.
+  limitations: string[];
+  methods: string[];
+  publicationId?: string;
+  links: { label: string; href: string }[];
+  // Add a plot or molecular visualisation from public/research/ to show it on the page and homepage.
+  figure?: Figure;
+}
+
+export const research: ResearchProject[] = [
+  {
+    slug: "opt-ddap",
+    title: "Differentiable atomic charges from DFT densities (opt-DDAP)",
+    status: "Published in JCTC, 2026",
+    period: "May 2025 – March 2026",
+    place: "IIT Bombay",
+    advisor: "Prof. Sudarshan Vijay",
+    summary:
+      "Reformulated density-derived atomic point (DDAP) charges as a differentiable PyTorch pipeline, yielding DFT-derived charges for long-range electrostatics in ML potentials.",
+    problem:
+      "Interatomic potentials with long-range electrostatics need atomic charges that are consistent with the electron density from DFT. DDAP obtains these charges by fitting Gaussians to the plane-wave density, but its Lagrange-multiplier solve breaks down for ill-conditioned fits, and the Gaussian basis has to be tuned by hand.",
+    contribution: [
+      "Cast the full DDAP fit (Gaussian basis, weighted reciprocal-space loss, linear solve) as an end-to-end differentiable graph, optimizing basis widths and cutoff with Adam.",
+      "Replaced the Lagrange-multiplier solve with an SVD pseudoinverse and charge rescaling.",
+    ],
+    evidence: [
+      "Charges stay physical up to κ ∼ 10¹⁷, versus 10¹¹ for the constrained solve.",
+      "Validated on ionic and covalent solids (NaCl vacancy supercells up to 63 atoms, MoS₂ monolayer), recovering the 7-electron Cl-vacancy charge from DFT difference densities.",
+      "Four starting points converged to consistent basis widths and atomic charges within 1.6%, removing manual parameter tuning.",
+    ],
+    limitations: [],
+    methods: ["DFT", "PyTorch", "Automatic differentiation", "SVD pseudoinverse"],
+    publicationId: "opt-ddap",
+    links: [],
+  },
+  {
+    slug: "metal-water-mlips",
+    title: "Long-range ML potentials for metal/water interfaces",
+    status: "Undergraduate thesis, ongoing",
+    period: "August 2026 – present",
+    place: "IIT Bombay",
+    advisor: "Prof. Sudarshan Vijay",
+    summary:
+      "Investigating which DFT electrostatic information long-range ML potentials need to avoid spurious water metallization at Au/water/Na⁺ interfaces.",
+    problem:
+      "In large-cell molecular dynamics with machine-learned interatomic potentials (MLIPs), water at an Au/water/Na⁺ interface can become spuriously metallic. The question is which electrostatic information from DFT a long-range potential needs to be trained on to avoid this.",
+    contribution: [
+      "Traced spurious water metallization in large-cell MLIP MD to short-range electrostatics.",
+      "Built long-range MLIPs (ACE+Q; MACE with charges and dipoles) trained on the DFT cell dipole.",
+      "Developing interfacial potential-profile supervision for long-range MLIPs, testing its transfer to larger interfaces and field-driven electronic response.",
+    ],
+    evidence: [
+      "With short-range electrostatics, water over-orients about 2× beyond the DFT training data, confirmed by the DFT density of states.",
+      "Long-range MLIPs cut water states at the Fermi level by about 30× in DFT-validated MD.",
+      "opt-DDAP captures water–metal potential shifts 4× better than the cell dipole, which per-atom charge labels fail to transfer to models.",
+    ],
+    limitations: [],
+    methods: ["DFT", "MLIPs", "ACE", "MACE", "Molecular dynamics", "opt-DDAP"],
+    links: [],
+  },
+  {
+    slug: "water-activity",
+    title: "Learning water activity in organic–water electrolytes",
+    status: "Research internship",
+    period: "December 2025 – August 2026",
+    place: "DELI Lab, NTU Singapore",
+    advisor: "Prof. Nitish Govindarajan",
+    summary:
+      "Built an ML pipeline mapping water environments in 100+ MD-simulated organic–water electrolytes to experimental water activity, a key lever on CO₂-reduction selectivity.",
+    problem:
+      "Water activity in organic–water electrolytes is a key lever on CO₂-reduction selectivity. The aim was to predict it from the local environments of water molecules in molecular dynamics simulations, in a way that stays physically interpretable.",
+    contribution: [
+      "Encoded 423K water molecules from 59 DMF systems with Li⁺, TBA⁺ and TEA⁺ salts as 14,560-dimensional SOAP descriptors, compressed to 50 dimensions with out-of-core incremental PCA.",
+      "Identified water states with UMAP and HDBSCAN density-based clustering, interpreted with physics descriptors.",
+      "Fit a physics-constrained regression mapping state fractions to water activity, with interpretable per-state terms.",
+      "Transferred the pipeline to DMSO electrolytes (38 systems; Li⁺, Cs⁺, TBA⁺ salts).",
+    ],
+    evidence: [
+      "Three transferable water states in the DMF systems: Li⁺-bound, DMF-caged and bulk-like.",
+      "Leave-one-out R² = 0.93 for water activity, versus 0.28 with K-means clustering.",
+      "In DMSO electrolytes, HDBSCAN resolved six water states and leave-one-out R² reached 0.84.",
+    ],
+    limitations: [
+      "A 33% underprediction for LiTFSI traces to an anion-specific binding effect that purely geometric descriptors cannot see.",
+    ],
+    methods: ["Molecular dynamics", "SOAP descriptors", "Incremental PCA", "UMAP", "HDBSCAN"],
+    links: [],
+  },
+];
+
+// ---------------------------------------------------------------------------
+// Other projects — software and course projects, listed on the Research page.
+// ---------------------------------------------------------------------------
+
+export interface Project {
+  slug: string;
+  title: string;
+  kind: "software" | "coursework";
+  // Where the project came from: course, club, internship or self project.
+  context: string;
   date: string;
-  category: string;
-  type: "research" | "personal" | "coursework";
-  featured: boolean;
-  fullDescription: string;
+  summary: string;
+  points: string[];
+  methods: string[];
+  links: { label: string; href: string }[];
   images: string[];
   videos: string[];
   pdfs: string[];
-  arxiv?: string;
-  institute?: string;
 }
 
 export const projects: Project[] = [
   {
-    title: "Solvation Environment Classification for Multi-Solvent Electrolytes",
-    slug: "soap-descriptors-ml",
-    description: "Engineered a unified molecular feature pipeline using SOAP descriptors across MD trajectories to classify distinct solvation environments in ACN/DMF mixtures, with ongoing work on MLIP-based prediction of water activity.",
-    tech: ["Python", "SOAP Descriptors", "PyTorch", "Scikit-learn", "PCA", "KMeans", "MLIPs"],
-    date: "Nov '25 - Present",
-    category: "Research",
-    type: "research",
-    featured: true,
-    institute: "DELI Lab, NTU Singapore",
-    fullDescription: "Engineered a unified molecular feature pipeline using SOAP descriptors across MD trajectories, producing a structured dataset for multi-solvent comparative analysis. Trained an unsupervised clustering model on high-dimensional SOAP descriptors to classify distinct solvation environments across ACN/DMF trajectories. Developing MLIP-based methods to predict water activity in multi-solvent electrolyte mixtures using learned solvation geometries. Work conducted at the DELI Lab, NTU Singapore, under Prof. Nitish Govindarajan.",
+    slug: "physika-dft",
+    title: "Plane-wave DFT in Physika",
+    kind: "software",
+    context: "Scientific Research Intern, Deep Forest Sciences · Supervisor: Dr. Bharath Ramsundar",
+    date: "June – August 2026",
+    summary:
+      "Added density functional theory to Physika, an open-source typed, differentiable programming language for writing physical models and their solvers in math-like notation.",
+    points: [
+      "Implemented plane-wave Kohn–Sham DFT in Physika by rewriting SimpleDFT from Julia as 7 typed modules, matching the reference energies of H, He and H₂ to 10⁻⁶ Ha.",
+      "Replaced hand-derived Kohn–Sham gradients with automatic differentiation of the total energy, then used the solver to find the equilibrium bond length of the H₂ molecule.",
+      "Added differentiable Fourier transforms to Physika (Cooley–Tukey and N-D FFTs), the core step of plane-wave codes, and authored 3 tutorials on Physika, FFTs and DFT.",
+    ],
+    methods: ["Physika", "Julia", "Kohn–Sham DFT", "FFT", "Automatic differentiation"],
+    links: [{ label: "Code", href: "https://github.com/deepforestsci/physika" }],
     images: [],
     videos: [],
-    pdfs: []
+    pdfs: [],
   },
   {
-    title: "opt-DDAP: Optimisable Density-Derived Atomic Point Charges",
-    slug: "ml-interatomic-potentials",
-    description: "Developed opt-DDAP, a differentiable PyTorch reformulation of the DDAP method, enabling gradient-based optimisation of Gaussian basis parameters for stable, accurate atomic charge extraction from plane-wave DFT densities.",
-    tech: ["Python", "PyTorch", "DFT", "DDAP", "Ewald Summation", "Automatic Differentiation"],
-    date: "May '25 - Present",
-    category: "Research",
-    type: "research",
-    featured: true,
-    institute: "IIT Bombay",
-    arxiv: "2604.10984",
-    fullDescription: "Built a production-grade Python DDAP pipeline for reciprocal-space Gaussian fitting and stable atomic charge extraction from plane-wave DFT densities. Developed opt-DDAP, replacing the numerically fragile Lagrange-multiplier solver with a Moore–Penrose pseudoinverse followed by charge renormalisation, maintaining stability up to condition numbers κ(A) > 10¹⁰. Enabled gradient-based optimisation of Gaussian basis parameters (σ_start, f, g_c) via automatic differentiation, with <2% charge variation across diverse initial conditions. Validated on NaCl vacancy supercells and MoS₂ monolayer, including difference charge density reconstruction. Implemented Ewald-based long-range electrostatics for direct integration with MLIPs. Preprint: arXiv:2604.10984.",
-    images: [],
-    videos: [],
-    pdfs: []
-  },
-  {
-    title: "PlantWhisper — Multimodal AI for Plant Stress Detection",
     slug: "plantwhisper",
-    description: "A multimodal AI system that analyzes plant photos to detect stress and synthesizes the acoustic signature the plant would emit — translated to human-audible range, grounded in a 2023 Cell paper on plant bioacoustics.",
-    tech: ["Python", "PyTorch", "MobileNetV2", "FastSAM", "Grad-CAM", "Diffusion Models", "FastAPI", "Next.js", "Groq API", "Docker", "HuggingFace"],
-    date: "2025",
-    category: "Project",
-    type: "personal",
-    featured: true,
-    fullDescription: "PlantWhisper is a multimodal AI system grounded in Khait et al. (2023, Cell), which demonstrated plants emit ultrasonic clicks (20–150 kHz) under stress via xylem cavitation. Given a plant photo, the pipeline runs FastSAM segmentation, fine-tuned MobileNetV2 classification (95.4% accuracy, 38 disease classes), and Grad-CAM explainability heatmaps to produce a 0–100% stress score. A conditional diffusion UNet generates mel spectrograms conditioned on stress level, converted to audio via Griffin-Lim vocoder and pitch-shifted from 53 kHz to human-audible 1 kHz using a validated hump-shaped stress–emission curve. Groq's Llama 3.3 70B generates plant speech from the plant's perspective, voiced via stress-adaptive Edge-TTS. Deployed as a FastAPI + Docker backend, Gradio app on HuggingFace Spaces, and Next.js 15 / Tailwind CSS portfolio on Vercel.",
+    title: "PlantWhisper",
+    kind: "software",
+    context: "Self project",
+    date: "February – April 2026",
+    summary:
+      "Predicts plant stress from a single photo and synthesizes the ultrasonic clicks plants emit under drought.",
+    points: [
+      "Architected a 6-stage photo-to-audio pipeline predicting plant stress, served via a Dockerized FastAPI backend.",
+      "Trained a 500-step stress-conditioned diffusion UNet on 20k+ ultrasonic clips, generating cavitation spectrograms.",
+      "Engineered the vision stack: FastSAM segmentation, a 38-class MobileNetV2 classifier and Grad-CAM heatmaps.",
+    ],
+    methods: ["PyTorch", "Diffusion models", "FastSAM", "MobileNetV2", "Grad-CAM", "FastAPI", "Docker"],
+    links: [],
     images: [],
     videos: [],
-    pdfs: []
+    pdfs: [],
   },
   {
-    title: "DWSIM-Pilot — Claude-Guided Process Simulation via MCP",
     slug: "dwsim-pilot",
-    description: "An AI-powered chemical process design platform where Claude drives DWSIM simulations through a custom MCP server — taking engineers from a natural language brief to a physics-based process flowsheet in 5 gated stages.",
-    tech: ["Python", "MCP", "FastAPI", "DWSIM", "Next.js", "React", "TypeScript", "Claude API", "Docker", "SSE"],
-    date: "2025",
-    category: "Project",
-    type: "personal",
-    featured: true,
-    fullDescription: "CPD-Pilot is a full-stack chemical process design platform built around a custom Model Context Protocol (MCP) server exposing 25+ specialized tools for Claude integration. The MCP server covers four domains: a process library with 15+ pre-built industrial synthesis routes (ammonia, ethanol, methanol, etc.), NLP-based parameter extraction with automatic unit normalization, web search for novel processes, and a DWSIM integration layer (2,500+ lines) handling compound management, unit operations, stream conditions, thermodynamic model selection (PR, SRK, NRTL), simulation execution, and PNG/SVG flowsheet export via a 3-strategy fallback. Claude guides users through a gated 5-stage workflow — requirements parsing, route selection, thermodynamic model confirmation, block-flow diagram, and DWSIM-generated PFD — with user approval required at each stage. FastAPI backend manages session-based state persistence and real-time SSE streaming; Next.js 14 / React 18 frontend delivers live chat, interactive BFD visualization, and DWSIM flowsheet rendering. Deployed as a Docker Compose stack with health checks and persistent volume management.",
+    title: "DWSIM-Pilot — AI copilot for chemical process design",
+    kind: "software",
+    context: "Self project",
+    date: "March 2026",
+    summary: "Turns a plain-English process brief into a simulator-ready DWSIM chemical flowsheet.",
+    points: [
+      "Automated flowsheet drafting for 11 industrial processes using an LLM driving DWSIM via 26 tools over MCP.",
+      "Structured LLM output with JSON schemas and an 11-process library, reducing invalid downstream simulator calls.",
+      "Designed a staged LLM workflow where each artifact informs the next, refining raw briefs into DWSIM process flow diagrams.",
+    ],
+    methods: ["Python", "MCP", "LLMs", "JSON Schema", "DWSIM"],
+    links: [],
     images: [],
     videos: [],
-    pdfs: []
+    pdfs: [],
   },
   {
-    title: "Physics-Informed Diffusion Models for CT Reconstruction",
-    slug: "physics-informed-diffusion-ct",
-    description: "Adapted the PINN-DaDiff framework from MRI to CT by replacing Fourier-domain physics with fully differentiable Radon transform. Built a four-stage physics-informed generative pipeline for X-ray photon statistics.",
-    tech: ["Python", "PyTorch", "PINN", "Diffusion Models", "Medical Imaging"],
-    date: "Sep '25 - Present",
-    category: "Machine Learning",
-    type: "coursework",
-    featured: false,
-    fullDescription: "Adapted the PINN-DaDiff framework from MRI to CT by replacing Fourier-domain physics with fully differentiable Radon transform. Built a four-stage physics-informed generative pipeline for X-ray photon statistics.",
+    slug: "drywall-segmentation",
+    title: "Prompted segmentation for drywall quality assurance",
+    kind: "software",
+    context: "Self project · Vision-language segmentation",
+    date: "February – March 2026",
+    summary: "Fine-tuned CLIPSeg to segment drywall taping and cracks from text prompts.",
+    points: [
+      "Fine-tuned CLIPSeg for prompt-driven drywall QA, training only its 1.78M-parameter decoder (1.2% of 150.7M parameters).",
+      "Rebuilt 4,473 coarse bounding-box labels into dense COCO polygon masks, unlocking pixel-accurate crack supervision.",
+      "Achieved 0.61 and 0.47 mIoU on taping and crack prompts at 45 ms per image, stable across 6 prompt paraphrases.",
+    ],
+    methods: ["PyTorch", "CLIPSeg", "HuggingFace", "COCO"],
+    links: [],
     images: [],
     videos: [],
-    pdfs: []
+    pdfs: [],
   },
   {
-    title: "AI Guard Agent for Room Monitoring",
+    slug: "brain-mri-segmentation",
+    title: "Brain MRI segmentation",
+    kind: "coursework",
+    context: "CS 736 course project · Instructor: Prof. Suyash P. Awate",
+    date: "February – March 2026",
+    summary: "Brain tissue segmentation with bias-field correction, fuzzy c-means and an MRF-regularized Gaussian mixture model.",
+    points: [
+      "Modeled MRI bias-field artifacts jointly with tissue clustering via a spatially regularized fuzzy c-means algorithm.",
+      "Built an MRF-regularized Gaussian mixture model via EM-ICM for coherent brain tissue segmentation.",
+    ],
+    methods: ["Fuzzy c-means", "Gaussian mixture models", "Markov random fields", "EM"],
+    links: [],
+    images: [],
+    videos: [],
+    pdfs: [],
+  },
+  {
     slug: "ai-guard-agent",
-    description: "Developed an AI guard agent with DeepFace, MediaPipe, Whisper, and TTS for real-time monitoring. Designed guard-level user enrollment and command activation to deter unwanted access.",
-    tech: ["Python", "DeepFace", "MediaPipe", "Whisper", "TTS", "Computer Vision"],
-    date: "Sep '25",
-    category: "Computer Vision",
-    type: "coursework",
-    featured: false,
-    fullDescription: "Developed an AI guard agent with DeepFace, MediaPipe, Whisper, and TTS for real-time monitoring. Designed guard-level user enrollment and command activation to deter unwanted access.",
+    title: "Multi-modal real-time AI surveillance system",
+    kind: "coursework",
+    context: "EE 782 course project · Instructor: Prof. Amit Sethi",
+    date: "October – November 2025",
+    summary:
+      "A multi-modal pipeline fusing speech recognition, face recognition and an LLM through a state-machine orchestrator with four-level threat escalation.",
+    points: [
+      "Engineered an Avengers-themed multi-modal AI pipeline fusing Faster-Whisper ASR, dlib 128-D face embeddings and Gemini 1.5 Pro via a state-machine orchestrator driving 4-level threat escalation.",
+      "Built a Telegram Bot API integration for real-time intruder image capture and automated threat alerts.",
+      "Optimized multi-threaded TTS, frame skipping and intruder-ID tracking for concurrent audio-visual processing.",
+      "Achieved 95% voice activation and 87% face recognition accuracy across 4 enrolled users, with a 1.3 s voice response.",
+    ],
+    methods: ["Faster-Whisper", "dlib", "Gemini 1.5 Pro", "Telegram Bot API"],
+    links: [],
     images: [],
     videos: [],
-    pdfs: []
+    pdfs: [],
   },
   {
-    title: "DOGGO 1.0 — Quadruped Robot",
-    slug: "doggo-quadruped-robot",
-    description: "Designed the mechanical structure of the bot using SolidWorks and simulated the environment in Gazebo Fortress. Integrated ROS 2 with Python and implemented 2-DOF leg motion for stable gait generation using Inverse Kinematics.",
-    tech: ["Python", "ROS 2", "Gazebo", "SolidWorks", "Inverse Kinematics", "Arduino"],
-    date: "Jan '25 - Apr '25",
-    category: "Robotics",
-    type: "coursework",
-    featured: false,
-    fullDescription: "Designed the mechanical structure of the bot using SolidWorks and simulated the environment in Gazebo Fortress. Integrated ROS 2 with Python and implemented 2-DOF leg motion for stable gait generation using Inverse Kinematics.",
-    images: [],
-    videos: [],
-    pdfs: []
-  },
-  {
-    title: "Surgical Organ Segmentation with Uncertainty Estimation",
-    slug: "surgical-organ-segmentation",
-    description: "CS 736 · IIT Bombay — fine-tuned SegFormer-B0 on the DSAD laparoscopic dataset for multi-organ segmentation across 11 organ classes, with MC-Dropout uncertainty maps and risk-coverage analysis.",
-    tech: ["Python", "PyTorch", "SegFormer", "HuggingFace Transformers", "Albumentations", "OpenCV"],
-    date: "2025",
-    category: "Computer Vision",
-    type: "coursework",
-    featured: false,
-    fullDescription: "Course project for CS 736: Medical Image Computing at IIT Bombay. Built a surgical organ segmentation pipeline on the DSAD laparoscopic dataset covering 11 organ classes (liver, pancreas, colon, spleen, ureter, etc.) across binary and multilabel subsets. Fine-tuned SegFormer-B0 (pre-trained on ADE20K) using a combined Dice + Cross-Entropy loss with AdamW optimisation, gradient accumulation, and cosine LR scheduling, tracking per-organ IoU and HD95 on held-out test splits stratified by surgery ID. Implemented a smoke detection preprocessing stage using dark channel prior scoring and CLAHE-based image enhancement. Added MC-Dropout uncertainty estimation with per-pixel entropy maps, temperature scaling calibration (reliability diagrams), and a risk-coverage curve (AURC) to characterise selective prediction behaviour.",
-    images: [],
-    videos: [],
-    pdfs: []
-  },
-  {
-    title: "CNN-LSTM & CNN-Transformer for Remote Sensing",
     slug: "cnn-lstm-transformer-remote-sensing",
-    description: "Implemented CNN-LSTM and CNN-Transformer architectures for automated captioning of satellite images. Experimented with ResNet, MobileNetV2, InceptionV3 for feature extraction.",
-    tech: ["Python", "TensorFlow", "CNN", "LSTM", "Transformer", "ResNet"],
-    date: "Aug '25",
-    category: "Computer Vision",
-    type: "coursework",
-    featured: false,
-    fullDescription: "Implemented CNN-LSTM and CNN-Transformer architectures for automated captioning of satellite images. Experimented with ResNet, MobileNetV2, InceptionV3 for feature extraction.",
+    title: "End-to-end image captioning for remote sensing",
+    kind: "coursework",
+    context: "EE 782 course project · Instructor: Prof. Amit Sethi",
+    date: "October – November 2025",
+    summary: "CNN-LSTM and CNN-Transformer captioning of aerial images on RSICD.",
+    points: [
+      "Built CNN-LSTM and CNN-Transformer captioning pipelines on RSICD (10.9k aerial images) in PyTorch.",
+      "Improved BLEU-4 by 86% and METEOR by 35% using Transformer decoding over a tuned LSTM baseline.",
+      "Trained 21M- and 47M-parameter decoders with AdamW, label smoothing, mixed precision and causal + key-padding masks.",
+    ],
+    methods: ["PyTorch", "LSTM", "Transformer"],
+    links: [],
     images: [],
     videos: [],
-    pdfs: []
+    pdfs: [],
   },
   {
-    title: "Custom CNN for Chest X-ray Classification",
     slug: "custom-cnn-chest-xray",
-    description: "DS 303 · IIT Bombay — built a custom CNN achieving 97% accuracy and 0.978 F1-score on chest X-rays, with Grad-CAM for infected region localisation.",
-    tech: ["Python", "Keras", "CNN", "Grad-CAM"],
-    date: "Apr '25",
-    category: "Computer Vision",
-    type: "coursework",
-    featured: false,
-    fullDescription: "Course project for DS 303: Introduction to ML at IIT Bombay. Built a custom CNN achieving 97% accuracy and 0.978 F1-score on chest X-rays using a tailored Keras architecture, with Grad-CAM applied to highlight infected regions.",
+    title: "Explainable CNN for pneumonia detection",
+    kind: "coursework",
+    context: "DS 303 course project · Instructor: Prof. Manjesh Hanawal",
+    date: "April 2025",
+    summary: "A custom CNN reaching 97% accuracy and 0.978 F1 on chest X-rays, with Grad-CAM explanations.",
+    points: [
+      "Built a custom CNN with 97% accuracy and 0.978 F1-score on chest X-rays using a tailored Keras architecture.",
+      "Applied Grad-CAM to highlight attention on infected lung regions and generate interpretable clinical insights.",
+      "Used dropout and confusion-matrix analysis to improve generalization on imbalanced medical data.",
+    ],
+    methods: ["Keras", "CNN", "Grad-CAM"],
+    links: [],
     images: [],
     videos: [],
-    pdfs: []
+    pdfs: [],
   },
   {
-    title: "Wi-Fi Controlled Quadcopter",
+    slug: "doggo-quadruped-robot",
+    title: "DOGGO 1.0 — a quadruped robot",
+    kind: "coursework",
+    context: "ERC project · Electronics and Robotics Club, IIT Bombay",
+    date: "January – April 2025",
+    summary: "Designed and simulated a quadruped robot with inverse-kinematics gait control in ROS 2.",
+    points: [
+      "Designed the robot's mechanical structure in SolidWorks and simulated the environment in Gazebo Fortress.",
+      "Integrated ROS 2, visualizing joint trajectories in RViz2, and implemented 2-DOF leg motion for stable gait generation using inverse kinematics.",
+      "Calibrated 8 MG996 servos via a PCA9685-controlled PWM interface.",
+    ],
+    methods: ["ROS 2", "Gazebo", "SolidWorks", "Inverse kinematics"],
+    links: [],
+    images: [],
+    videos: [],
+    pdfs: [],
+  },
+  {
+    slug: "optimization-algorithms",
+    title: "Exploring optimization algorithms",
+    kind: "coursework",
+    context: "Winter in Data Science · Analytics Club, IIT Bombay",
+    date: "December 2024",
+    summary: "Gradient descent, Newton's method and BFGS from scratch, with an Armijo line search.",
+    points: [
+      "Implemented gradient descent, Newton's method and BFGS from scratch, benchmarking convergence on ridge regression.",
+      "Built an Armijo backtracking line search for adaptive step sizes, stabilizing descent on ill-conditioned losses.",
+    ],
+    methods: ["Python", "NumPy", "Numerical optimization"],
+    links: [],
+    images: [],
+    videos: [],
+    pdfs: [],
+  },
+  {
+    slug: "physics-informed-diffusion-ct",
+    title: "Physics-informed diffusion models for CT reconstruction",
+    kind: "coursework",
+    context: "Course project",
+    date: "2025",
+    summary:
+      "Adapted the PINN-DaDiff framework from MRI to CT by replacing Fourier-domain physics with a differentiable Radon transform.",
+    points: [
+      "Adapted the PINN-DaDiff framework from MRI to CT by replacing Fourier-domain physics with a fully differentiable Radon transform.",
+      "Built a four-stage physics-informed generative pipeline that models X-ray photon statistics.",
+    ],
+    methods: ["PyTorch", "Diffusion models", "Medical imaging"],
+    links: [],
+    images: [],
+    videos: [],
+    pdfs: [],
+  },
+  {
+    slug: "surgical-organ-segmentation",
+    title: "Surgical organ segmentation with uncertainty estimation",
+    kind: "coursework",
+    context: "CS 736 course project",
+    date: "2025",
+    summary:
+      "Fine-tuned SegFormer-B0 for 11-class organ segmentation on laparoscopic images, with MC-Dropout uncertainty and risk–coverage analysis.",
+    points: [
+      "Built a segmentation pipeline on the DSAD laparoscopic dataset covering 11 organ classes, fine-tuning SegFormer-B0 with a combined Dice + cross-entropy loss and tracking per-organ IoU and HD95.",
+      "Added smoke detection with a dark-channel-prior score and CLAHE enhancement.",
+      "Estimated uncertainty with MC-Dropout entropy maps, calibrated with temperature scaling, and evaluated selective prediction with a risk–coverage curve (AURC).",
+    ],
+    methods: ["PyTorch", "SegFormer", "MC-Dropout"],
+    links: [],
+    images: [],
+    videos: [],
+    pdfs: [],
+  },
+  {
     slug: "wifi-controlled-quadcopter",
-    description: "Coordinated a team of 6 to assemble a quadcopter achieving a record flight of 120+ seconds. Integrated lightweight, durable components with Arduino, MPU 6050, and NodeMCU.",
-    tech: ["Arduino", "NodeMCU", "MPU 6050", "RemoteXY", "C++"],
-    date: "Jan '24 - Apr '24",
-    category: "Robotics",
-    type: "coursework",
-    featured: false,
-    fullDescription: "Coordinated a team of 16 to assemble a quadcopter achieving a record flight of 120+ seconds. Integrated lightweight, durable components with Arduino, MPU 6050, and NodeMCU.",
+    title: "Wi-Fi controlled quadcopter",
+    kind: "coursework",
+    context: "Team project",
+    date: "2024",
+    summary: "Led a student team that built a quadcopter with a record flight of over 120 seconds.",
+    points: [
+      "Coordinated a student team to assemble a quadcopter that achieved a record flight of over 120 seconds.",
+      "Integrated lightweight components with an Arduino, an MPU 6050 IMU and a NodeMCU.",
+    ],
+    methods: ["Arduino", "NodeMCU", "C++"],
+    links: [],
     images: [],
     videos: [],
-    pdfs: []
-  }
+    pdfs: [],
+  },
 ];
 
-export const publications = [
+// ---------------------------------------------------------------------------
+// About page
+// ---------------------------------------------------------------------------
+
+export const about = {
+  bio: [
+    "I study Chemical Engineering at IIT Bombay, with a minor in Artificial Intelligence and Data Science from the Centre for Machine Intelligence and Data Science (C-MInDS).",
+    "My research interests are machine learning interatomic potentials, atomistic machine learning, long-range electrostatics and differentiable scientific computing: AI for science, broadly.",
+  ],
+  education: [
+    {
+      degree: "B.Tech. in Chemical Engineering, Minor in AI and Data Science",
+      institution: "Indian Institute of Technology Bombay",
+      year: "2023 – 2027",
+    },
+  ],
+  awards: ["Undergraduate Research Award (URA-01), IIT Bombay, for excellence in undergraduate research (2026)"],
+  earlierAchievements: [
+    "400/400 in PCMCs, Karnataka Class XII board examination (2022)",
+    "Zonal rank 240 among 4,000+ students, SOF International Mathematics Olympiad (2019)",
+  ],
+};
+
+export const experiences = [
   {
-    title: "opt-DDAP: Optimisable Density-Derived Atomic Point Charges",
-    authors: "Mohith H, Sudarshan Vijay",
-    venue: "arXiv preprint",
-    year: "2025",
-    arxivId: "2604.10984",
-    abstract: "We present opt-DDAP, a differentiable reformulation of the Density-Derived Atomic Point charge (DDAP) method as a PyTorch computational graph. By replacing the numerically fragile Lagrange-multiplier solver with a Moore–Penrose pseudoinverse followed by charge renormalisation, opt-DDAP maintains numerical stability up to condition numbers κ(A) > 10¹⁰. Gradient-based optimisation of Gaussian basis parameters (σ_start, f, g_c) is enabled via automatic differentiation, demonstrating robustness to initial conditions with <2% variation in extracted charges across four distinct starting points. Validated on NaCl vacancy supercells and MoS₂ monolayer with faithful reconstruction of difference charge densities.",
-    tags: ["ML Interatomic Potentials", "DFT", "Atomic Charges", "PyTorch", "Automatic Differentiation"],
-    url: "https://arxiv.org/abs/2604.10984",
-    pdfUrl: "https://arxiv.org/pdf/2604.10984",
-    institute: "IIT Bombay",
-  }
+    title: "Undergraduate Thesis",
+    organization: "IIT Bombay",
+    date: "August 2026 – present",
+    advisor: "Prof. Sudarshan Vijay",
+    description: "Long-range ML potentials for metal/water interfaces.",
+    link: "/research/metal-water-mlips",
+  },
+  {
+    title: "Scientific Research Intern",
+    organization: "Deep Forest Sciences",
+    date: "June – August 2026",
+    advisor: "Dr. Bharath Ramsundar",
+    description: "Added plane-wave density functional theory to Physika, an open-source differentiable programming language.",
+    link: "/projects/physika-dft",
+  },
+  {
+    title: "Research Intern",
+    organization: "DELI Lab, Nanyang Technological University, Singapore",
+    date: "December 2025 – August 2026",
+    advisor: "Prof. Nitish Govindarajan",
+    description: "Learned water activity in organic–water electrolytes from MD-simulated water environments.",
+    link: "/research/water-activity",
+  },
+  {
+    title: "Supervised Learning Project",
+    organization: "IIT Bombay",
+    date: "May 2025 – March 2026",
+    advisor: "Prof. Sudarshan Vijay",
+    description: "Differentiable density-derived atomic charges (opt-DDAP), published in JCTC.",
+    link: "/research/opt-ddap",
+  },
+  {
+    title: "Controls Engineer",
+    organization: "Team ChemEca, IIT Bombay",
+    date: "October 2024 – April 2025",
+    description:
+      "Designed control strategies for a lab-scale direct air capture (DAC) pilot plant for the OpenAir Carbon Removal Challenge 2025 and AIChE's ChemE Cube Competition. Drafted PFDs and P&IDs for a shallow-bed adsorption DAC system in AutoCAD and performed a HAZOP analysis, proposing safety controls for thermal and vacuum risks.",
+  },
 ];
 
-export const hobbies = [
-  {
-    title: "Quizzing",
-    description: "Secured 1st place in district-level science quiz among 40+ teams. Represented district in Thatt Antha Heli Science Quiz on DD Chandana.",
-    icon: "Brain",
-    hasGallery: false,
-    images: []
-  },
-  {
-    title: "Sketching",
-    description: "Creating artistic sketches and drawings.",
-    icon: "Pencil",
-    hasGallery: true,
-    images: [
-      "/hobbies/sketches/1.jpeg",
-      "/hobbies/sketches/2.jpeg",
-      "/hobbies/sketches/3.jpeg",
-      "/hobbies/sketches/4.jpeg",
-      "/hobbies/sketches/5.jpeg",
-      "/hobbies/sketches/6.jpeg"
-    ]
-  },
-  {
-    title: "Whistling Songs",
-    description: "Enjoy whistling melodies and songs in my free time.",
-    icon: "Music",
-    hasGallery: false,
-    images: []
-  },
-  {
-    title: "Sky Pictures",
-    description: "Capturing beautiful moments of the sky through photography.",
-    icon: "Camera",
-    hasGallery: true,
-    images: [
-      "/hobbies/sky-pictures/sky1.jpeg",
-      "/hobbies/sky-pictures/sky2.jpeg",
-      "/hobbies/sky-pictures/sky3.jpeg",
-      "/hobbies/sky-pictures/sky4.jpeg",
-      "/hobbies/sky-pictures/sky5.jpeg",
-      "/hobbies/sky-pictures/sky6.jpeg",
-      "/hobbies/sky-pictures/sky7.jpeg",
-      "/hobbies/sky-pictures/sky8.jpeg",
-      "/hobbies/sky-pictures/sky9.jpeg"
-    ]
-  }
-];
+export const interests = {
+  summary:
+    "Outside research I quiz, dance, sketch, whistle songs, photograph the sky, and keep an eye on what I'm listening to.",
+  items: [
+    {
+      title: "Quizzing",
+      description:
+        "Finalist (top 12 of 300+ teams) in the Bottomline Business Quiz at IIM Indore, against premier B-schools (2024). Earlier, won a district-level science quiz among 40+ teams and represented my district on DD Chandana (2019).",
+      images: [] as string[],
+    },
+    {
+      title: "Dance",
+      description: "Part of the second-runner-up team in Gyrations, IIT Bombay's inter-hostel dance championship (2024).",
+      images: [] as string[],
+    },
+    {
+      title: "Volunteering",
+      description: "Volunteered with the National Service Scheme (NSS) at IIT Bombay on sustainable social initiatives (2024).",
+      images: [] as string[],
+    },
+    {
+      title: "Sketching",
+      description: "Pencil sketches and drawings.",
+      images: [1, 2, 3, 4, 5, 6].map((n) => `/hobbies/sketches/${n}.jpeg`),
+    },
+    {
+      title: "Sky pictures",
+      description: "Photographs of the sky.",
+      images: [1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) => `/hobbies/sky-pictures/sky${n}.jpeg`),
+    },
+    {
+      title: "Whistling",
+      description: "Whistling melodies in my free time.",
+      images: [] as string[],
+    },
+  ],
+};

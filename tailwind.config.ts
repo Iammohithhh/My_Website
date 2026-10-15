@@ -1,67 +1,63 @@
 import type { Config } from "tailwindcss";
+import typography from "@tailwindcss/typography";
 
 const config: Config = {
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  darkMode: "class",
   theme: {
     extend: {
       colors: {
-        parchment: {
-          DEFAULT: '#F7F4EE',
-          dark: '#EDE8DF',
-          darker: '#E0D9CE',
+        paper: {
+          DEFAULT: "#FCFBF8",
+          dim: "#F4F2EC",
         },
         ink: {
-          DEFAULT: '#1C1C2E',
-          light: '#3D3D5C',
-          muted: '#6B6B8A',
-          faint: '#A0A0B8',
+          DEFAULT: "#1B1B1B",
+          muted: "#55534E",
+          faint: "#8A877F",
         },
-        indigo: {
-          DEFAULT: '#5B4FD9',
-          light: '#7B70E8',
-          dark: '#4038B0',
-          pale: '#ECEAFA',
-        },
-        science: {
-          DEFAULT: '#2E9E6B',
-          light: '#4DB885',
-          dark: '#1F7050',
-          pale: '#E6F7F0',
-        },
-        amber: {
-          DEFAULT: '#F0A500',
-          light: '#F5C040',
-          dark: '#C87B00',
-          pale: '#FEF5D9',
-        },
-        rust: {
-          DEFAULT: '#B05A2F',
-          light: '#D07848',
-          pale: '#F9EDE6',
+        line: "#E5E1D8",
+        accent: {
+          DEFAULT: "#0F6E68",
+          dark: "#0A514C",
+          pale: "#E6F2F0",
         },
       },
-      animation: {
-        'float': 'float 4s ease-in-out infinite',
-        'gradient': 'gradient 8s linear infinite',
+      fontFamily: {
+        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+        serif: ["var(--font-serif)", "Georgia", "serif"],
       },
-      keyframes: {
-        float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-8px)' },
-        },
-        gradient: {
-          '0%, 100%': { backgroundPosition: '0% 50%' },
-          '50%': { backgroundPosition: '100% 50%' },
+      maxWidth: {
+        page: "64rem",
+        prose: "42rem",
+      },
+      typography: {
+        DEFAULT: {
+          css: {
+            "--tw-prose-body": "#1B1B1B",
+            "--tw-prose-headings": "#1B1B1B",
+            "--tw-prose-links": "#0F6E68",
+            "--tw-prose-bold": "#1B1B1B",
+            "--tw-prose-quotes": "#55534E",
+            "--tw-prose-captions": "#55534E",
+            "--tw-prose-code": "#1B1B1B",
+            "--tw-prose-hr": "#E5E1D8",
+            "--tw-prose-th-borders": "#E5E1D8",
+            "--tw-prose-td-borders": "#E5E1D8",
+            "--tw-prose-pre-bg": "#F4F2EC",
+            "--tw-prose-pre-code": "#1B1B1B",
+            a: { textUnderlineOffset: "3px" },
+            "code::before": { content: "none" },
+            "code::after": { content: "none" },
+            figcaption: { textAlign: "center" },
+          },
         },
       },
     },
   },
-  plugins: [],
+  plugins: [typography],
 };
 
 export default config;

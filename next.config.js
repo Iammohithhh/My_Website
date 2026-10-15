@@ -1,18 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'github.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'avatars.githubusercontent.com',
-      },
-    ],
+  // Old project URLs for research work now live under /research.
+  async redirects() {
+    return [
+      { source: "/projects/ml-interatomic-potentials", destination: "/research/opt-ddap", permanent: true },
+      { source: "/projects/soap-descriptors-ml", destination: "/research/water-activity", permanent: true },
+    ];
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
