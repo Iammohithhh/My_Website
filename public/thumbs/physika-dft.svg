@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 320" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
+<rect width="480" height="320" fill="#EAE8F8"/>
+
+<rect x="28" y="74" width="170" height="172" rx="12" fill="#fff"/>
+<circle cx="46" cy="92" r="4" fill="#E5A0A0"/><circle cx="60" cy="92" r="4" fill="#E8CF8F"/><circle cx="74" cy="92" r="4" fill="#A9D3A4"/>
+<text x="44" y="130" font-family="ui-monospace, Consolas, monospace" font-size="15" fill="#4F46B5">E[ρ] =</text>
+<text x="44" y="154" font-family="ui-monospace, Consolas, monospace" font-size="15" fill="#1B1B1B">  T + V + Exc</text>
+<rect x="44" y="172" width="120" height="8" rx="4" fill="#B7B1EA"/>
+<rect x="44" y="190" width="90" height="8" rx="4" fill="#B7B1EA"/>
+<rect x="44" y="208" width="132" height="8" rx="4" fill="#B7B1EA"/>
+<g transform="translate(266 160)">
+  <path d="M-40 0 A40 40 0 0 1 34 -21" fill="none" stroke="#4F46B5" stroke-width="4"/>
+  <path d="M26 -30 L40 -18 L22 -14 Z" fill="#4F46B5"/>
+  <path d="M40 0 A40 40 0 0 1 -34 21" fill="none" stroke="#4F46B5" stroke-width="4"/>
+  <path d="M-26 30 L-40 18 L-22 14 Z" fill="#4F46B5"/>
+  <text y="6" text-anchor="middle" font-size="17" font-weight="600" fill="#1B1B1B">SCF</text>
+</g>
+<line x1="350" y1="160" x2="430" y2="160" stroke="#1B1B1B" stroke-width="4"/>
+<circle cx="350" cy="160" r="22" fill="#4F46B5" fill-opacity=".25" stroke="#4F46B5" stroke-width="2.5"/>
+<circle cx="430" cy="160" r="22" fill="#4F46B5" fill-opacity=".25" stroke="#4F46B5" stroke-width="2.5"/>
+<text x="350" y="166" text-anchor="middle" font-size="16" fill="#1B1B1B">H</text>
+<text x="430" y="166" text-anchor="middle" font-size="16" fill="#1B1B1B">H</text>
+<text x="390" y="224" text-anchor="middle" font-size="18" fill="#1B1B1B">H₂</text>
+</svg>

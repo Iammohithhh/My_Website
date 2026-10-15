@@ -5,17 +5,23 @@ import { getAllPosts } from "@/lib/writing";
 import { cvHref } from "@/lib/links";
 
 export default function Header() {
-  const items = [{ name: "Research", href: "/research" }];
+  const items = [
+    { name: "About", href: "/#about" },
+    { name: "Research", href: "/#research" },
+    { name: "Publications", href: "/#publications" },
+    { name: "Experience", href: "/#experience" },
+    { name: "Projects", href: "/#projects" },
+  ];
   // Writing only appears in the menu once there is at least one published post.
   if (getAllPosts().length > 0) items.push({ name: "Writing", href: "/writing" });
-  items.push({ name: "About", href: "/about" });
+  items.push({ name: "Hobbies", href: "/hobbies" });
   const cv = cvHref();
   if (cv) items.push({ name: "CV", href: cv });
 
   return (
-    <header className="border-b border-line">
-      <div className="max-w-page mx-auto px-4 sm:px-6 py-4 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
-        <Link href="/" className="font-serif text-xl font-semibold text-ink hover:text-accent transition-colors">
+    <header className="sticky top-0 z-40 border-b border-line/80 bg-paper/85 backdrop-blur-md">
+      <div className="mx-auto flex max-w-page items-center gap-6 px-4 py-3 sm:px-6">
+        <Link href="/" className="shrink-0 font-serif text-lg font-semibold text-ink hover:text-accent transition-colors">
           {personalInfo.name}
         </Link>
         <NavLinks items={items} />

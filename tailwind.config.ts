@@ -22,8 +22,20 @@ const config: Config = {
         accent: {
           DEFAULT: "#0F6E68",
           dark: "#0A514C",
-          pale: "#E6F2F0",
+          pale: "#E3F0ED",
         },
+        iris: {
+          DEFAULT: "#4F46B5",
+          pale: "#EAE8F8",
+        },
+        ochre: {
+          DEFAULT: "#9A5A0C",
+          pale: "#F8EEDF",
+        },
+      },
+      boxShadow: {
+        card: "0 1px 2px rgba(27, 27, 27, 0.04), 0 8px 24px -12px rgba(27, 27, 27, 0.14)",
+        lift: "0 2px 4px rgba(27, 27, 27, 0.05), 0 16px 32px -12px rgba(27, 27, 27, 0.2)",
       },
       fontFamily: {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],

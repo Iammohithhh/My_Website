@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 320" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
+<rect width="480" height="320" fill="#F8EEDF"/>
+
+<line x1="20" y1="262" x2="460" y2="262" stroke="#8A877F" stroke-width="2"/>
+<rect x="130" y="104" width="220" height="64" rx="18" fill="#B4690E"/>
+<rect x="340" y="80" width="72" height="50" rx="12" fill="#B4690E"/>
+<circle cx="392" cy="100" r="6" fill="#fff"/>
+<g stroke="#1B1B1B" stroke-width="9" stroke-linecap="round" fill="none">
+  <path d="M164 160 L140 210 L166 258"/>
+  <path d="M206 160 L196 212 L224 258"/>
+  <path d="M290 160 L268 210 L292 258"/>
+  <path d="M326 160 L320 212 L350 258"/>
+</g>
+<g fill="#E6C08E" stroke="#1B1B1B" stroke-width="2">
+  <circle cx="164" cy="160" r="9"/><circle cx="140" cy="210" r="8"/>
+  <circle cx="206" cy="160" r="9"/><circle cx="196" cy="212" r="8"/>
+  <circle cx="290" cy="160" r="9"/><circle cx="268" cy="210" r="8"/>
+  <circle cx="326" cy="160" r="9"/><circle cx="320" cy="212" r="8"/>
+</g>
+</svg>

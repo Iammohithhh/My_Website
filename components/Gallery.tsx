@@ -19,16 +19,21 @@ export default function Gallery({ title, images }: { title: string; images: stri
 
   return (
     <>
-      <ul className="mt-3 grid grid-cols-3 sm:grid-cols-6 gap-2">
+      <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3">
         {images.map((src, i) => (
           <li key={src}>
             <button
               type="button"
               onClick={() => setOpen(i)}
-              className="block w-full aspect-square overflow-hidden rounded border border-line"
+              className="group block aspect-[4/5] w-full overflow-hidden rounded-2xl border border-line bg-white shadow-card"
               aria-label={`Open ${title} ${i + 1} of ${images.length}`}
             >
-              <img src={src} alt="" loading="lazy" className="w-full h-full object-cover hover:opacity-90" />
+              <img
+                src={src}
+                alt=""
+                loading="lazy"
+                className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.04]"
+              />
             </button>
           </li>
         ))}

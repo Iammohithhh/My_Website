@@ -94,7 +94,12 @@ export default function Vibes() {
 
   return (
     <div>
-      <h1 className="text-3xl font-semibold">Vibes</h1>
+      <p className="text-sm">
+        <a href="/hobbies" className="link">
+          ← Hobbies
+        </a>
+      </p>
+      <h1 className="mt-4 text-3xl font-semibold">Vibes</h1>
       <p className="meta mt-2">What I&apos;ve been listening to on Spotify.</p>
 
       <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3">

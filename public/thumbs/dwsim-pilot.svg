@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 320" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
+<rect width="480" height="320" fill="#EAE8F8"/>
+
+<rect x="24" y="96" width="150" height="88" rx="14" fill="#fff"/>
+<path d="M48 184 L44 206 L70 184 Z" fill="#fff"/>
+<rect x="42" y="118" width="112" height="9" rx="4" fill="#B7B1EA"/>
+<rect x="42" y="136" width="84" height="9" rx="4" fill="#B7B1EA"/>
+<rect x="42" y="154" width="98" height="9" rx="4" fill="#B7B1EA"/>
+<line x1="184" y1="140" x2="212" y2="140" stroke="#4F46B5" stroke-width="3" stroke-linecap="round"/>
+<path d="M210 133 L222 140 L210 147 Z" fill="#4F46B5"/>
+
+<rect x="232" y="118" width="54" height="44" rx="6" fill="#fff" stroke="#4F46B5" stroke-width="2.5"/>
+<text x="259" y="145" text-anchor="middle" font-size="13" fill="#1B1B1B">Feed</text>
+<rect x="312" y="104" width="50" height="72" rx="24" fill="#fff" stroke="#4F46B5" stroke-width="2.5"/>
+<text x="337" y="145" text-anchor="middle" font-size="13" fill="#1B1B1B">R-1</text>
+<rect x="390" y="92" width="40" height="96" rx="6" fill="#fff" stroke="#4F46B5" stroke-width="2.5"/>
+<text x="410" y="145" text-anchor="middle" font-size="13" fill="#1B1B1B">S-1</text>
+<line x1="286" y1="140" x2="306" y2="140" stroke="#1B1B1B" stroke-width="2"/><path d="M302 135 L312 140 L302 145 Z" fill="#1B1B1B"/>
+<line x1="362" y1="140" x2="384" y2="140" stroke="#1B1B1B" stroke-width="2"/><path d="M380 135 L390 140 L380 145 Z" fill="#1B1B1B"/>
+<line x1="430" y1="110" x2="458" y2="110" stroke="#1B1B1B" stroke-width="2"/><path d="M454 105 L464 110 L454 115 Z" fill="#1B1B1B"/>
+<path d="M410 188 L410 222 L337 222 L337 182" fill="none" stroke="#1B1B1B" stroke-width="2" stroke-dasharray="5 4"/>
+<path d="M332 186 L337 176 L342 186 Z" fill="#1B1B1B"/>
+<text x="374" y="244" text-anchor="middle" font-size="12" fill="#8A877F">recycle</text>
+</svg>

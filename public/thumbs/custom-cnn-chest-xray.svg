@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 320" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
+<rect width="480" height="320" fill="#F8EEDF"/>
+
+<defs><radialGradient id="h" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#E5482F" stop-opacity=".9"/><stop offset=".5" stop-color="#F2B33D" stop-opacity=".6"/><stop offset="1" stop-color="#F2B33D" stop-opacity="0"/></radialGradient></defs>
+<rect x="120" y="30" width="240" height="260" rx="20" fill="#2F2F33"/>
+<path d="M232 70 C190 70 156 120 150 190 C146 240 170 262 204 256 C226 252 232 230 232 200 Z" fill="#6B6B72"/>
+<path d="M248 70 C290 70 324 120 330 190 C334 240 310 262 276 256 C254 252 248 230 248 200 Z" fill="#6B6B72"/>
+<rect x="234" y="40" width="12" height="150" rx="6" fill="#9A9AA2"/>
+<circle cx="292" cy="196" r="56" fill="url(#h)"/>
+<rect x="372" y="120" width="88" height="34" rx="17" fill="#fff"/>
+<text x="416" y="142" text-anchor="middle" font-size="13" fill="#B4690E">Grad-CAM</text>
+</svg>

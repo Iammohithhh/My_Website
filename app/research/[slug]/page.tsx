@@ -4,7 +4,8 @@ import { notFound } from "next/navigation";
 import InlineLinks from "@/components/InlineLinks";
 import PublicationItem from "@/components/PublicationItem";
 import { researchLinks } from "@/components/ResearchEntry";
-import { publications, research } from "@/lib/data";
+import TypeLabel from "@/components/TypeLabel";
+import { imageFor, publications, research } from "@/lib/data";
 
 export const dynamicParams = false;
 
@@ -48,27 +49,31 @@ export default async function ResearchProjectPage({ params }: Props) {
   const links = researchLinks(project);
 
   return (
-    <article className="max-w-prose">
+    <article className="mx-auto max-w-prose">
       <p className="text-sm">
-        <Link href="/research" className="link">
+        <Link href="/#research" className="link">
           ← Research
         </Link>
       </p>
-      <h1 className="mt-4 text-3xl font-semibold leading-tight">{project.title}</h1>
+      <div className="mt-5">
+        <TypeLabel>{project.status}</TypeLabel>
+      </div>
+      <h1 className="mt-3 text-3xl font-semibold leading-tight md:text-4xl">{project.title}</h1>
       <p className="meta mt-2">
         {project.place} · with {project.advisor} · {project.period}
       </p>
-      <p className="meta">{project.status}</p>
       <InlineLinks links={links} className="mt-3" />
 
-      <p className="mt-6 text-lg">{project.summary}</p>
+      <figure className="mt-8">
+        <img
+          src={imageFor(project)}
+          alt={`Overview of ${project.title}`}
+          className="w-full rounded-2xl border border-line shadow-card"
+        />
+        <figcaption className="meta mt-2 text-center">{project.imageCaption ?? "Schematic overview"}</figcaption>
+      </figure>
 
-      {project.figure && (
-        <figure className="mt-8">
-          <img src={project.figure.src} alt={project.figure.alt} className="w-full rounded border border-line bg-white" />
-          <figcaption className="meta mt-2 text-center">{project.figure.caption}</figcaption>
-        </figure>
-      )}
+      <p className="mt-8 text-lg">{project.summary}</p>
 
       <Section title="The problem">
         <p>{project.problem}</p>

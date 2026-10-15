@@ -28,6 +28,47 @@ export const intro = [
 
 export const motto = "Molecules → Models → Products";
 
+export const researchInterests = [
+  "AI for science",
+  "ML interatomic potentials",
+  "Atomistic machine learning",
+  "Long-range electrostatics",
+  "Differentiable scientific computing",
+];
+
+// Newest first. Keep each item to one sentence.
+export const news: { date: string; text: string; href?: string }[] = [
+  {
+    date: "Aug 2026",
+    text: "Started my undergraduate thesis on long-range ML potentials for metal/water interfaces with Prof. Sudarshan Vijay.",
+    href: "/research/metal-water-mlips",
+  },
+  {
+    date: "Jul 2026",
+    text: "opt-DDAP published in the Journal of Chemical Theory and Computation.",
+    href: "https://doi.org/10.1021/acs.jctc.6c00727",
+  },
+  {
+    date: "Jun 2026",
+    text: "Joined Deep Forest Sciences as a Scientific Research Intern, adding DFT to Physika.",
+    href: "/projects/physika-dft",
+  },
+  {
+    date: "2026",
+    text: "Received IIT Bombay's Undergraduate Research Award (URA-01).",
+  },
+  {
+    date: "Apr 2026",
+    text: "opt-DDAP preprint posted on arXiv.",
+    href: "https://arxiv.org/abs/2604.10984",
+  },
+  {
+    date: "Dec 2025",
+    text: "Joined the DELI Lab at NTU Singapore to work on water activity in organic–water electrolytes.",
+    href: "/research/water-activity",
+  },
+];
+
 // ---------------------------------------------------------------------------
 // Publications — the single source for papers. Research entries refer to them by id.
 // ---------------------------------------------------------------------------
@@ -70,12 +111,6 @@ export function publicationLinks(pub: Publication) {
 // what evidence supports it, what remains open, and where the outputs are.
 // ---------------------------------------------------------------------------
 
-export interface Figure {
-  src: string;
-  alt: string;
-  caption: string;
-}
-
 export interface ResearchProject {
   slug: string;
   title: string;
@@ -92,8 +127,14 @@ export interface ResearchProject {
   methods: string[];
   publicationId?: string;
   links: { label: string; href: string }[];
-  // Add a plot or molecular visualisation from public/research/ to show it on the page and homepage.
-  figure?: Figure;
+  // Defaults to the schematic at public/thumbs/<slug>.svg. To use a real plot or molecular
+  // visualisation instead, put it in public/research/ and set image (and imageCaption) here.
+  image?: string;
+  imageCaption?: string;
+}
+
+export function imageFor(item: { slug: string; image?: string }) {
+  return item.image ?? `/thumbs/${item.slug}.svg`;
 }
 
 export const research: ResearchProject[] = [
@@ -184,7 +225,10 @@ export const research: ResearchProject[] = [
 export interface Project {
   slug: string;
   title: string;
-  kind: "software" | "coursework";
+  label: "Internship" | "Self project" | "Course project" | "Club project" | "Team project";
+  year: number;
+  // Defaults to the schematic at public/thumbs/<slug>.svg; point this at a real figure to replace it.
+  image?: string;
   // Where the project came from: course, club, internship or self project.
   context: string;
   date: string;
@@ -201,7 +245,8 @@ export const projects: Project[] = [
   {
     slug: "physika-dft",
     title: "Plane-wave DFT in Physika",
-    kind: "software",
+    label: "Internship",
+    year: 2026,
     context: "Scientific Research Intern, Deep Forest Sciences · Supervisor: Dr. Bharath Ramsundar",
     date: "June – August 2026",
     summary:
@@ -220,7 +265,8 @@ export const projects: Project[] = [
   {
     slug: "plantwhisper",
     title: "PlantWhisper",
-    kind: "software",
+    label: "Self project",
+    year: 2026,
     context: "Self project",
     date: "February – April 2026",
     summary:
@@ -239,7 +285,8 @@ export const projects: Project[] = [
   {
     slug: "dwsim-pilot",
     title: "DWSIM-Pilot — AI copilot for chemical process design",
-    kind: "software",
+    label: "Self project",
+    year: 2026,
     context: "Self project",
     date: "March 2026",
     summary: "Turns a plain-English process brief into a simulator-ready DWSIM chemical flowsheet.",
@@ -257,7 +304,8 @@ export const projects: Project[] = [
   {
     slug: "drywall-segmentation",
     title: "Prompted segmentation for drywall quality assurance",
-    kind: "software",
+    label: "Self project",
+    year: 2026,
     context: "Self project · Vision-language segmentation",
     date: "February – March 2026",
     summary: "Fine-tuned CLIPSeg to segment drywall taping and cracks from text prompts.",
@@ -275,7 +323,8 @@ export const projects: Project[] = [
   {
     slug: "brain-mri-segmentation",
     title: "Brain MRI segmentation",
-    kind: "coursework",
+    label: "Course project",
+    year: 2026,
     context: "CS 736 course project · Instructor: Prof. Suyash P. Awate",
     date: "February – March 2026",
     summary: "Brain tissue segmentation with bias-field correction, fuzzy c-means and an MRF-regularized Gaussian mixture model.",
@@ -292,7 +341,8 @@ export const projects: Project[] = [
   {
     slug: "ai-guard-agent",
     title: "Multi-modal real-time AI surveillance system",
-    kind: "coursework",
+    label: "Course project",
+    year: 2025,
     context: "EE 782 course project · Instructor: Prof. Amit Sethi",
     date: "October – November 2025",
     summary:
@@ -312,7 +362,8 @@ export const projects: Project[] = [
   {
     slug: "cnn-lstm-transformer-remote-sensing",
     title: "End-to-end image captioning for remote sensing",
-    kind: "coursework",
+    label: "Course project",
+    year: 2025,
     context: "EE 782 course project · Instructor: Prof. Amit Sethi",
     date: "October – November 2025",
     summary: "CNN-LSTM and CNN-Transformer captioning of aerial images on RSICD.",
@@ -330,7 +381,8 @@ export const projects: Project[] = [
   {
     slug: "custom-cnn-chest-xray",
     title: "Explainable CNN for pneumonia detection",
-    kind: "coursework",
+    label: "Course project",
+    year: 2025,
     context: "DS 303 course project · Instructor: Prof. Manjesh Hanawal",
     date: "April 2025",
     summary: "A custom CNN reaching 97% accuracy and 0.978 F1 on chest X-rays, with Grad-CAM explanations.",
@@ -348,7 +400,8 @@ export const projects: Project[] = [
   {
     slug: "doggo-quadruped-robot",
     title: "DOGGO 1.0 — a quadruped robot",
-    kind: "coursework",
+    label: "Club project",
+    year: 2025,
     context: "ERC project · Electronics and Robotics Club, IIT Bombay",
     date: "January – April 2025",
     summary: "Designed and simulated a quadruped robot with inverse-kinematics gait control in ROS 2.",
@@ -366,7 +419,8 @@ export const projects: Project[] = [
   {
     slug: "optimization-algorithms",
     title: "Exploring optimization algorithms",
-    kind: "coursework",
+    label: "Club project",
+    year: 2024,
     context: "Winter in Data Science · Analytics Club, IIT Bombay",
     date: "December 2024",
     summary: "Gradient descent, Newton's method and BFGS from scratch, with an Armijo line search.",
@@ -383,7 +437,8 @@ export const projects: Project[] = [
   {
     slug: "physics-informed-diffusion-ct",
     title: "Physics-informed diffusion models for CT reconstruction",
-    kind: "coursework",
+    label: "Course project",
+    year: 2025,
     context: "Course project",
     date: "2025",
     summary:
@@ -401,7 +456,8 @@ export const projects: Project[] = [
   {
     slug: "surgical-organ-segmentation",
     title: "Surgical organ segmentation with uncertainty estimation",
-    kind: "coursework",
+    label: "Course project",
+    year: 2025,
     context: "CS 736 course project",
     date: "2025",
     summary:
@@ -420,7 +476,8 @@ export const projects: Project[] = [
   {
     slug: "wifi-controlled-quadcopter",
     title: "Wi-Fi controlled quadcopter",
-    kind: "coursework",
+    label: "Team project",
+    year: 2024,
     context: "Team project",
     date: "2024",
     summary: "Led a student team that built a quadcopter with a record flight of over 120 seconds.",
@@ -501,40 +558,51 @@ export const experiences = [
   },
 ];
 
-export const interests = {
+export type InterestIcon = "quiz" | "dance" | "volunteer" | "sketch" | "camera" | "music";
+
+export const interests: {
+  summary: string;
+  items: { title: string; icon: InterestIcon; description: string; images: string[] }[];
+} = {
   summary:
     "Outside research I quiz, dance, sketch, whistle songs, photograph the sky, and keep an eye on what I'm listening to.",
   items: [
     {
       title: "Quizzing",
+      icon: "quiz",
       description:
         "Finalist (top 12 of 300+ teams) in the Bottomline Business Quiz at IIM Indore, against premier B-schools (2024). Earlier, won a district-level science quiz among 40+ teams and represented my district on DD Chandana (2019).",
-      images: [] as string[],
+      images: [],
     },
     {
       title: "Dance",
+      icon: "dance",
       description: "Part of the second-runner-up team in Gyrations, IIT Bombay's inter-hostel dance championship (2024).",
-      images: [] as string[],
+      images: [],
     },
     {
       title: "Volunteering",
+      icon: "volunteer",
       description: "Volunteered with the National Service Scheme (NSS) at IIT Bombay on sustainable social initiatives (2024).",
-      images: [] as string[],
+      images: [],
     },
     {
       title: "Sketching",
+      icon: "sketch",
       description: "Pencil sketches and drawings.",
       images: [1, 2, 3, 4, 5, 6].map((n) => `/hobbies/sketches/${n}.jpeg`),
     },
     {
       title: "Sky pictures",
+      icon: "camera",
       description: "Photographs of the sky.",
       images: [1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) => `/hobbies/sky-pictures/sky${n}.jpeg`),
     },
     {
       title: "Whistling",
+      icon: "music",
       description: "Whistling melodies in my free time.",
-      images: [] as string[],
+      images: [],
     },
   ],
 };

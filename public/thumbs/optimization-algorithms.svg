@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 320" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
+<rect width="480" height="320" fill="#F8EEDF"/>
+<ellipse cx="300" cy="170" rx="34" ry="13" transform="rotate(-24 300 170)" fill="none" stroke="#B4690E" stroke-opacity="0.20" stroke-width="2"/><ellipse cx="300" cy="170" rx="68" ry="26" transform="rotate(-24 300 170)" fill="none" stroke="#B4690E" stroke-opacity="0.25" stroke-width="2"/><ellipse cx="300" cy="170" rx="102" ry="39" transform="rotate(-24 300 170)" fill="none" stroke="#B4690E" stroke-opacity="0.30" stroke-width="2"/><ellipse cx="300" cy="170" rx="136" ry="52" transform="rotate(-24 300 170)" fill="none" stroke="#B4690E" stroke-opacity="0.35" stroke-width="2"/><ellipse cx="300" cy="170" rx="170" ry="65" transform="rotate(-24 300 170)" fill="none" stroke="#B4690E" stroke-opacity="0.40" stroke-width="2"/><ellipse cx="300" cy="170" rx="204" ry="78" transform="rotate(-24 300 170)" fill="none" stroke="#B4690E" stroke-opacity="0.45" stroke-width="2"/>
+<path d="M80 96 L132 186 L158 120 L196 200 L222 140 L250 192 L270 156 L288 178 L300 170" fill="none" stroke="#B4690E" stroke-width="3" stroke-linejoin="round"/>
+<path d="M80 96 C150 110 240 150 300 170" fill="none" stroke="#4F46B5" stroke-width="3" stroke-dasharray="7 6"/>
+<circle cx="80" cy="96" r="7" fill="#1B1B1B"/>
+<path d="M300 158 L304 166 L313 167 L306 173 L308 182 L300 177 L292 182 L294 173 L287 167 L296 166 Z" fill="#1B1B1B"/>
+<text x="140" y="262" font-size="14" fill="#B4690E">gradient descent</text>
+<text x="330" y="96" font-size="14" fill="#4F46B5">Newton / BFGS</text>
+</svg>

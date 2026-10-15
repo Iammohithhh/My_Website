@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import InlineLinks from "@/components/InlineLinks";
-import { projects } from "@/lib/data";
+import TypeLabel, { toneForLabel } from "@/components/TypeLabel";
+import { imageFor, projects } from "@/lib/data";
 
 export const dynamicParams = false;
 
@@ -28,18 +29,28 @@ export default async function ProjectPage({ params }: Props) {
   if (!project) notFound();
 
   return (
-    <article className="max-w-prose">
+    <article className="mx-auto max-w-prose">
       <p className="text-sm">
-        <Link href="/research" className="link">
-          ← Research
+        <Link href="/#projects" className="link">
+          ← Projects
         </Link>
       </p>
-      <h1 className="mt-4 text-3xl font-semibold leading-tight">{project.title}</h1>
-      <p className="meta mt-2">{project.context}</p>
-      <p className="meta">{project.date}</p>
+      <div className="mt-5">
+        <TypeLabel tone={toneForLabel(project.label)}>{project.label}</TypeLabel>
+      </div>
+      <h1 className="mt-3 text-3xl font-semibold leading-tight md:text-4xl">{project.title}</h1>
+      <p className="meta mt-2">
+        {project.context} · {project.date}
+      </p>
       <InlineLinks links={project.links} className="mt-3" />
 
-      <p className="mt-6 text-lg">{project.summary}</p>
+      <img
+        src={imageFor(project)}
+        alt={`Overview of ${project.title}`}
+        className="mt-8 w-full rounded-2xl border border-line shadow-card"
+      />
+
+      <p className="mt-8 text-lg">{project.summary}</p>
       <ul className="mt-6 list-disc pl-5 space-y-2 marker:text-ink-faint">
         {project.points.map((point) => (
           <li key={point}>{point}</li>

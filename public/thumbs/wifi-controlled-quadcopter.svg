@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 320" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
+<rect width="480" height="320" fill="#F8EEDF"/>
+
+<g stroke="#1B1B1B" stroke-width="10" stroke-linecap="round">
+  <line x1="170" y1="90" x2="310" y2="230"/>
+  <line x1="310" y1="90" x2="170" y2="230"/>
+</g>
+<ellipse cx="170" cy="90" rx="52" ry="14" fill="#B4690E" fill-opacity=".3" stroke="#B4690E" stroke-width="2"/><circle cx="170" cy="90" r="8" fill="#1B1B1B"/><ellipse cx="310" cy="90" rx="52" ry="14" fill="#B4690E" fill-opacity=".3" stroke="#B4690E" stroke-width="2"/><circle cx="310" cy="90" r="8" fill="#1B1B1B"/><ellipse cx="170" cy="230" rx="52" ry="14" fill="#B4690E" fill-opacity=".3" stroke="#B4690E" stroke-width="2"/><circle cx="170" cy="230" r="8" fill="#1B1B1B"/><ellipse cx="310" cy="230" rx="52" ry="14" fill="#B4690E" fill-opacity=".3" stroke="#B4690E" stroke-width="2"/><circle cx="310" cy="230" r="8" fill="#1B1B1B"/>
+<rect x="214" y="134" width="52" height="52" rx="10" fill="#B4690E"/>
+<g fill="none" stroke="#B4690E" stroke-width="3" stroke-linecap="round">
+  <path d="M396 64 a26 26 0 0 1 36 0"/>
+  <path d="M386 52 a40 40 0 0 1 56 0" opacity=".6"/>
+  <path d="M376 40 a54 54 0 0 1 76 0" opacity=".35"/>
+</g>
+<circle cx="414" cy="76" r="5" fill="#B4690E"/>
+</svg>

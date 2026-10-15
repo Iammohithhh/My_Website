@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 320" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
+<rect width="480" height="320" fill="#F8EEDF"/>
+
+<rect width="480" height="320" fill="#1F1A1C"/>
+<circle cx="240" cy="160" r="140" fill="#B5655E"/>
+<path d="M120 120 C160 70 260 70 300 110 C320 140 270 170 220 160 C170 150 130 160 120 120 Z" fill="#7A3B2E"/>
+<path d="M120 120 C160 70 260 70 300 110 C320 140 270 170 220 160 C170 150 130 160 120 120 Z" fill="#B4690E" fill-opacity=".45" stroke="#F2C14E" stroke-width="2"/>
+<path d="M180 200 C220 180 300 190 340 220 C320 260 230 270 190 250 C170 240 168 214 180 200 Z" fill="#D69A8C"/>
+<path d="M180 200 C220 180 300 190 340 220 C320 260 230 270 190 250 C170 240 168 214 180 200 Z" fill="#4F9BD9" fill-opacity=".45" stroke="#9FD3FF" stroke-width="2"/>
+<path d="M300 110 C340 120 362 160 346 196" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="4 5" opacity=".8"/>
+<circle cx="240" cy="160" r="140" fill="none" stroke="#1F1A1C" stroke-width="18"/>
+</svg>
