@@ -14,10 +14,10 @@ npm run build      # production build, drafts hidden
 
 | What | Where |
 | --- | --- |
-| Intro, publications, research, projects, experience, awards, interests | `lib/data.ts` |
+| Intro, news, publications, research, projects, experience, awards, hobbies | `lib/data.ts` |
 | Blog posts | `content/writing/*.md` |
 | Images for posts | `public/writing/<post-name>/` |
-| Research figures | `public/research/`, referenced from `figure` in `lib/data.ts` |
+| Research and project images | `public/thumbs/<slug>.svg` by default; to use a real figure, add it to `public/` and set `image` on that item in `lib/data.ts` |
 | CV | `public/cv.pdf` (the CV link appears once this file exists) |
 | Profile photo | `public/profile.jpeg` |
 
