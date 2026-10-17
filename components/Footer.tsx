@@ -1,5 +1,5 @@
 import { personalInfo } from "@/lib/data";
-import { getAllPosts } from "@/lib/writing";
+import { getAllPosts } from "@/lib/blog";
 
 export default function Footer() {
   const hasPosts = getAllPosts().length > 0;
@@ -11,7 +11,7 @@ export default function Footer() {
         <p className="flex flex-wrap gap-x-4">
           <a className="hover:text-accent" href={`mailto:${personalInfo.email}`}>{personalInfo.email}</a>
           <a className="hover:text-accent" href={personalInfo.github}>GitHub</a>
-          {hasPosts && <a className="hover:text-accent" href="/writing/rss.xml">RSS</a>}
+          {hasPosts && <a className="hover:text-accent" href="/blog/rss.xml">RSS</a>}
         </p>
       </div>
     </footer>

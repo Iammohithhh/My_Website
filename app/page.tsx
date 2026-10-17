@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowRight, GraduationCap, Trophy } from "lucide-react";
 import ProfileLinks from "@/components/ProfileLinks";
 import ResearchEntry from "@/components/ResearchEntry";
-import ProjectCard from "@/components/ProjectCard";
+import ProjectCard, { ProjectRow } from "@/components/ProjectCard";
 import PublicationItem from "@/components/PublicationItem";
 import PostList from "@/components/PostList";
 import Section from "@/components/Section";
@@ -19,7 +19,7 @@ import {
   research,
   researchInterests,
 } from "@/lib/data";
-import { getAllPosts } from "@/lib/writing";
+import { getAllPosts } from "@/lib/blog";
 
 function groupByYear<T extends { year: number }>(items: T[]) {
   const years = [...new Set(items.map((i) => i.year))].sort((a, b) => b - a);
@@ -30,8 +30,16 @@ function YearLabel({ year }: { year: number }) {
   return <h3 className="mb-4 font-sans text-sm font-semibold uppercase tracking-widest text-ink-faint">{year}</h3>;
 }
 
+function SubHeading({ children }: { children: React.ReactNode }) {
+  return <h3 className="mb-4 font-sans text-sm font-semibold uppercase tracking-widest text-ink-faint">{children}</h3>;
+}
+
 export default function Home() {
   const posts = getAllPosts().slice(0, 3);
+  // Newest first; projects from the same year keep their order in lib/data.ts.
+  const sortedProjects = [...projects].sort((a, b) => b.year - a.year);
+  const highlighted = sortedProjects.filter((p) => p.highlight);
+  const otherProjects = sortedProjects.filter((p) => !p.highlight);
   const previewImages = [
     ...(interests.items.find((i) => i.icon === "sketch")?.images.slice(0, 2) ?? []),
     ...(interests.items.find((i) => i.icon === "camera")?.images.slice(0, 2) ?? []),
@@ -152,18 +160,40 @@ export default function Home() {
       </Section>
 
       <Section id="projects" title="Projects">
-        <div className="space-y-10">
-          {groupByYear(projects).map(({ year, items }) => (
-            <div key={year}>
-              <YearLabel year={year} />
-              <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                {items.map((project) => (
-                  <ProjectCard key={project.slug} project={project} />
-                ))}
-              </div>
+        <div className="space-y-12">
+          <div>
+            <SubHeading>Highlighted projects</SubHeading>
+            <div className="grid gap-6 md:grid-cols-2">
+              {highlighted.map((project) => (
+                <ProjectCard key={project.slug} project={project} />
+              ))}
             </div>
-          ))}
+          </div>
+          <div>
+            <SubHeading>Academic &amp; other projects</SubHeading>
+            <ul className="divide-y divide-line rounded-2xl border border-line bg-white shadow-card">
+              {otherProjects.map((project) => (
+                <li key={project.slug}>
+                  <ProjectRow project={project} />
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
+      </Section>
+
+      <Section
+        id="blog"
+        title="Blog"
+        action={
+          posts.length > 0 && (
+            <Link href="/blog" className="link text-sm">
+              All posts
+            </Link>
+          )
+        }
+      >
+        {posts.length > 0 ? <PostList posts={posts} /> : <p className="text-ink-muted">No posts yet.</p>}
       </Section>
 
       <Section id="education" title="Education & awards">
@@ -188,20 +218,6 @@ export default function Home() {
           </div>
         </div>
       </Section>
-
-      {posts.length > 0 && (
-        <Section
-          id="writing"
-          title="Recent writing"
-          action={
-            <Link href="/writing" className="link text-sm">
-              All writing
-            </Link>
-          }
-        >
-          <PostList posts={posts} />
-        </Section>
-      )}
 
       <Link
         href="/hobbies"

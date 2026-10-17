@@ -1,5 +1,5 @@
 // All site content lives here. Edit this file to update the website;
-// blog posts live separately in content/writing/*.md.
+// blog posts live separately in content/blog/*.md.
 
 export const site = {
   name: "Mohith H",
@@ -225,6 +225,8 @@ export interface Project {
   title: string;
   label: "Internship" | "Self project" | "Course project" | "Club project" | "Team project";
   year: number;
+  // true = "Highlighted projects" (AI for science); false = "Academic & other projects".
+  highlight: boolean;
   // Defaults to the schematic at public/thumbs/<slug>.svg; point this at a real figure to replace it.
   image?: string;
   // Where the project came from: course, club, internship or self project.
@@ -245,6 +247,7 @@ export const projects: Project[] = [
     title: "Plane-wave DFT in Physika",
     label: "Internship",
     year: 2026,
+    highlight: true,
     context: "Scientific Research Intern, Deep Forest Sciences · Supervisor: Dr. Bharath Ramsundar",
     date: "June – August 2026",
     summary:
@@ -265,6 +268,7 @@ export const projects: Project[] = [
     title: "PlantWhisper",
     label: "Self project",
     year: 2026,
+    highlight: true,
     context: "Self project",
     date: "February – April 2026",
     summary:
@@ -285,6 +289,7 @@ export const projects: Project[] = [
     title: "DWSIM-Pilot — AI copilot for chemical process design",
     label: "Self project",
     year: 2026,
+    highlight: true,
     context: "Self project",
     date: "March 2026",
     summary: "Turns a plain-English process brief into a simulator-ready DWSIM chemical flowsheet.",
@@ -304,6 +309,7 @@ export const projects: Project[] = [
     title: "Prompted segmentation for drywall quality assurance",
     label: "Self project",
     year: 2026,
+    highlight: false,
     context: "Self project · Vision-language segmentation",
     date: "February – March 2026",
     summary: "Fine-tuned CLIPSeg to segment drywall taping and cracks from text prompts.",
@@ -323,6 +329,7 @@ export const projects: Project[] = [
     title: "Brain MRI segmentation",
     label: "Course project",
     year: 2026,
+    highlight: false,
     context: "CS 736 course project · Instructor: Prof. Suyash P. Awate",
     date: "February – March 2026",
     summary: "Brain tissue segmentation with bias-field correction, fuzzy c-means and an MRF-regularized Gaussian mixture model.",
@@ -341,6 +348,7 @@ export const projects: Project[] = [
     title: "Multi-modal real-time AI surveillance system",
     label: "Course project",
     year: 2025,
+    highlight: false,
     context: "EE 782 course project · Instructor: Prof. Amit Sethi",
     date: "October – November 2025",
     summary:
@@ -362,6 +370,7 @@ export const projects: Project[] = [
     title: "End-to-end image captioning for remote sensing",
     label: "Course project",
     year: 2025,
+    highlight: false,
     context: "EE 782 course project · Instructor: Prof. Amit Sethi",
     date: "October – November 2025",
     summary: "CNN-LSTM and CNN-Transformer captioning of aerial images on RSICD.",
@@ -381,6 +390,7 @@ export const projects: Project[] = [
     title: "Explainable CNN for pneumonia detection",
     label: "Course project",
     year: 2025,
+    highlight: false,
     context: "DS 303 course project · Instructor: Prof. Manjesh Hanawal",
     date: "April 2025",
     summary: "A custom CNN reaching 97% accuracy and 0.978 F1 on chest X-rays, with Grad-CAM explanations.",
@@ -400,6 +410,7 @@ export const projects: Project[] = [
     title: "DOGGO 1.0 — a quadruped robot",
     label: "Club project",
     year: 2025,
+    highlight: false,
     context: "ERC project · Electronics and Robotics Club, IIT Bombay",
     date: "January – April 2025",
     summary: "Designed and simulated a quadruped robot with inverse-kinematics gait control in ROS 2.",
@@ -419,6 +430,7 @@ export const projects: Project[] = [
     title: "Exploring optimization algorithms",
     label: "Club project",
     year: 2024,
+    highlight: false,
     context: "Winter in Data Science · Analytics Club, IIT Bombay",
     date: "December 2024",
     summary: "Gradient descent, Newton's method and BFGS from scratch, with an Armijo line search.",
@@ -437,10 +449,10 @@ export const projects: Project[] = [
     title: "Physics-informed diffusion models for CT reconstruction",
     label: "Course project",
     year: 2025,
+    highlight: true,
     context: "Course project",
     date: "2025",
-    summary:
-      "Adapted the PINN-DaDiff framework from MRI to CT by replacing Fourier-domain physics with a differentiable Radon transform.",
+    summary: "Physics-informed generative modelling for CT reconstruction, built on a differentiable Radon transform.",
     points: [
       "Adapted the PINN-DaDiff framework from MRI to CT by replacing Fourier-domain physics with a fully differentiable Radon transform.",
       "Built a four-stage physics-informed generative pipeline that models X-ray photon statistics.",
@@ -456,6 +468,7 @@ export const projects: Project[] = [
     title: "Surgical organ segmentation with uncertainty estimation",
     label: "Course project",
     year: 2025,
+    highlight: false,
     context: "CS 736 course project",
     date: "2025",
     summary:
@@ -476,6 +489,7 @@ export const projects: Project[] = [
     title: "Wi-Fi controlled quadcopter",
     label: "Team project",
     year: 2024,
+    highlight: false,
     context: "Team project",
     date: "2024",
     summary: "Led a student team that built a quadcopter with a record flight of over 120 seconds.",

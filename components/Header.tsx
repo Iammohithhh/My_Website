@@ -1,7 +1,6 @@
 import Link from "next/link";
 import NavLinks from "./NavLinks";
 import { personalInfo } from "@/lib/data";
-import { getAllPosts } from "@/lib/writing";
 import { cvHref } from "@/lib/links";
 
 export default function Header() {
@@ -11,10 +10,9 @@ export default function Header() {
     { name: "Publications", href: "/#publications" },
     { name: "Experience", href: "/#experience" },
     { name: "Projects", href: "/#projects" },
+    { name: "Blog", href: "/#blog" },
+    { name: "Hobbies", href: "/hobbies" },
   ];
-  // Writing only appears in the menu once there is at least one published post.
-  if (getAllPosts().length > 0) items.push({ name: "Writing", href: "/writing" });
-  items.push({ name: "Hobbies", href: "/hobbies" });
   const cv = cvHref();
   if (cv) items.push({ name: "CV", href: cv });
 

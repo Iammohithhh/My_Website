@@ -1,5 +1,5 @@
 import { site } from "@/lib/data";
-import { getAllPosts } from "@/lib/writing";
+import { getAllPosts } from "@/lib/blog";
 
 export const dynamic = "force-static";
 
@@ -17,7 +17,7 @@ export function GET() {
 
   const items = posts
     .map((post) => {
-      const url = `${site.url}/writing/${post.slug}`;
+      const url = `${site.url}/blog/${post.slug}`;
       return `    <item>
       <title>${escapeXml(post.title)}</title>
       <link>${url}</link>
@@ -32,11 +32,11 @@ ${post.tags.map((tag) => `      <category>${escapeXml(tag)}</category>`).join("\
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>${escapeXml(site.name)} — Writing</title>
-    <link>${site.url}/writing</link>
+    <title>${escapeXml(site.name)} — Blog</title>
+    <link>${site.url}/blog</link>
     <description>${escapeXml(site.description)}</description>
     <language>en</language>
-    <atom:link href="${site.url}/writing/rss.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="${site.url}/blog/rss.xml" rel="self" type="application/rss+xml" />
 ${items}
   </channel>
 </rss>

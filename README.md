@@ -1,6 +1,6 @@
 # Mohith H — personal website
 
-Source for [mohith-h.vercel.app](https://mohith-h.vercel.app): research, publications and writing. Built with Next.js and Tailwind CSS and deployed on Vercel; every push to `main` deploys automatically.
+Source for [mohith-h.vercel.app](https://mohith-h.vercel.app): research, publications and blog. Built with Next.js and Tailwind CSS and deployed on Vercel; every push to `main` deploys automatically.
 
 ## Run it locally
 
@@ -15,17 +15,17 @@ npm run build      # production build, drafts hidden
 | What | Where |
 | --- | --- |
 | Intro, news, publications, research, projects, experience, awards, hobbies | `lib/data.ts` |
-| Blog posts | `content/writing/*.md` |
-| Images for posts | `public/writing/<post-name>/` |
+| Blog posts | `content/blog/*.md` |
+| Images for posts | `public/blog/<post-name>/` |
 | Research and project images | `public/thumbs/<slug>.svg` by default; to use a real figure, add it to `public/` and set `image` on that item in `lib/data.ts` |
 | CV | `public/cv.pdf` (the CV link appears once this file exists) |
 | Profile photo | `public/profile.jpeg` |
 
 Publications are defined once in `lib/data.ts` and reused by the homepage, the Research page and each research page.
 
-## Writing a post
+## Writing a blog post
 
-1. Copy `content/writing/example-post.md` to `content/writing/<post-name>.md`. The file name becomes the URL (`/writing/<post-name>`), so don't rename it after publishing.
+1. Copy `content/blog/example-post.md` to `content/blog/<post-name>.md`. The file name becomes the URL (`/blog/<post-name>`), so don't rename it after publishing.
 2. Edit the front matter:
 
    ```yaml
@@ -45,10 +45,10 @@ Publications are defined once in `lib/data.ts` and reused by the homepage, the R
 Supported: `$inline$` and `$$display$$` maths (KaTeX), fenced code with syntax highlighting, GitHub tables, footnotes (`[^1]`), and captioned figures:
 
 ```markdown
-![Alt text for screen readers](/writing/my-post/plot.png "Figure 1. Caption shown under the image.")
+![Alt text for screen readers](/blog/my-post/plot.png "Figure 1. Caption shown under the image.")
 ```
 
-The **Writing** menu item, the homepage "Recent writing" section and the RSS feed (`/writing/rss.xml`) appear once at least one post is published.
+The **Blog** menu item and homepage section are always shown ("No posts yet" while empty). Published posts appear there newest first, and the RSS feed is at `/blog/rss.xml`.
 
 ## Spotify (`/vibes`)
 

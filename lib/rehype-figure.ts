@@ -2,7 +2,7 @@ import type { Element, Root } from "hast";
 import { visit } from "unist-util-visit";
 
 // Turns a paragraph containing only an image with a title into a captioned figure:
-//   ![Alt text for screen readers](/writing/post/plot.png "Caption shown under the figure")
+//   ![Alt text for screen readers](/blog/post/plot.png "Caption shown under the figure")
 export default function rehypeFigure() {
   return (tree: Root) => {
     visit(tree, "element", (node: Element, index, parent) => {

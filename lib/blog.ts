@@ -12,7 +12,7 @@ import rehypeHighlight from "rehype-highlight";
 import rehypeStringify from "rehype-stringify";
 import rehypeFigure from "./rehype-figure";
 
-const POSTS_DIR = path.join(process.cwd(), "content", "writing");
+const POSTS_DIR = path.join(process.cwd(), "content", "blog");
 
 // Drafts are visible with `npm run dev` and never included in production builds or the feed.
 const SHOW_DRAFTS = process.env.NODE_ENV !== "production";

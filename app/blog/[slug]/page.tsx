@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { formatDate, getAllPosts, getPost } from "@/lib/writing";
+import { formatDate, getAllPosts, getPost } from "@/lib/blog";
 import "katex/dist/katex.min.css";
 import "highlight.js/styles/github.css";
 
@@ -39,8 +39,8 @@ export default async function PostPage({ params }: Props) {
   return (
     <article className="max-w-prose mx-auto">
       <p className="text-sm">
-        <Link href="/writing" className="link">
-          ← Writing
+        <Link href="/blog" className="link">
+          ← Blog
         </Link>
       </p>
       <header className="mt-4 mb-10">

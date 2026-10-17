@@ -9,7 +9,7 @@ draft: true
 
 This file is a **draft**, so it appears when you run `npm run dev` but is left out of the live site and the RSS feed. To publish a post, set `draft: false` (or delete the line).
 
-The file name becomes the URL: `content/writing/example-post.md` → `/writing/example-post`. Don't rename a post after publishing, or old links will break.
+The file name becomes the URL: `content/blog/example-post.md` → `/blog/example-post`. Don't rename a post after publishing, or old links will break.
 
 ## Equations
 
@@ -31,9 +31,9 @@ q = q - (q.sum() - total_charge) / len(q)  # renormalise
 
 ## Figures
 
-Put images in `public/writing/<post-name>/`. The text in quotes becomes the caption; the text in square brackets is alt text for screen readers.
+Put images in `public/blog/<post-name>/`. The text in quotes becomes the caption; the text in square brackets is alt text for screen readers.
 
-![A smooth decaying oscillation](/writing/example-post/figure.svg "Figure 1. A placeholder figure with a caption.")
+![A smooth decaying oscillation](/blog/example-post/figure.svg "Figure 1. A placeholder figure with a caption.")
 
 ## Footnotes and references
 
