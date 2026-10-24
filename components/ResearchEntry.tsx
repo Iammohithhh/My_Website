@@ -8,6 +8,27 @@ export function researchLinks(project: ResearchProject) {
   return [...(pub ? publicationLinks(pub) : []), ...project.links];
 }
 
+// Compact row for the homepage: small picture, status, title and one-line summary.
+export function ResearchRow({ project }: { project: ResearchProject }) {
+  return (
+    <Link
+      href={`/research/${project.slug}`}
+      className="group grid grid-cols-[6rem_1fr] items-start gap-4 py-5 sm:grid-cols-[9rem_1fr] sm:gap-6"
+    >
+      <img src={imageFor(project)} alt="" className="aspect-[3/2] w-full rounded-lg border border-line object-cover" />
+      <div>
+        <div className="flex flex-wrap items-center gap-2">
+          <TypeLabel>{project.status}</TypeLabel>
+        </div>
+        <h3 className="mt-1.5 font-sans text-lg font-semibold leading-snug transition-colors group-hover:text-accent">
+          {project.title}
+        </h3>
+        <p className="mt-1 text-ink-muted line-clamp-2">{project.summary}</p>
+      </div>
+    </Link>
+  );
+}
+
 // Research card: picture on the left, summary on the right (stacked on phones).
 export default function ResearchEntry({ project }: { project: ResearchProject }) {
   const href = `/research/${project.slug}`;

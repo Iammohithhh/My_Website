@@ -10,7 +10,7 @@ export default function NotFound() {
           homepage
         </Link>{" "}
         or the{" "}
-        <Link href="/#research" className="link">
+        <Link href="/research" className="link">
           research page
         </Link>
         .

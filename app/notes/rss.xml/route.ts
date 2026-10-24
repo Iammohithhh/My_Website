@@ -1,5 +1,5 @@
 import { site } from "@/lib/data";
-import { getAllPosts } from "@/lib/blog";
+import { getAllNotes } from "@/lib/notes";
 
 export const dynamic = "force-static";
 
@@ -13,18 +13,17 @@ function escapeXml(text: string) {
 }
 
 export function GET() {
-  const posts = getAllPosts().filter((post) => !post.draft);
-
-  const items = posts
-    .map((post) => {
-      const url = `${site.url}/blog/${post.slug}`;
+  const items = getAllNotes()
+    .filter((note) => !note.draft)
+    .map((note) => {
+      const url = `${site.url}/notes/${note.slug}`;
       return `    <item>
-      <title>${escapeXml(post.title)}</title>
+      <title>${escapeXml(note.title)}</title>
       <link>${url}</link>
       <guid>${url}</guid>
-      <pubDate>${post.date.toUTCString()}</pubDate>
-      <description>${escapeXml(post.description)}</description>
-${post.tags.map((tag) => `      <category>${escapeXml(tag)}</category>`).join("\n")}
+      <pubDate>${new Date(note.date).toUTCString()}</pubDate>
+      <description>${escapeXml(note.summary)}</description>
+${note.tags.map((tag) => `      <category>${escapeXml(tag)}</category>`).join("\n")}
     </item>`;
     })
     .join("\n");
@@ -32,11 +31,11 @@ ${post.tags.map((tag) => `      <category>${escapeXml(tag)}</category>`).join("\
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>${escapeXml(site.name)} — Blog</title>
-    <link>${site.url}/blog</link>
+    <title>${escapeXml(site.name)} — Notes</title>
+    <link>${site.url}/notes</link>
     <description>${escapeXml(site.description)}</description>
     <language>en</language>
-    <atom:link href="${site.url}/blog/rss.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="${site.url}/notes/rss.xml" rel="self" type="application/rss+xml" />
 ${items}
   </channel>
 </rss>

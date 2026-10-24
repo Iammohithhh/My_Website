@@ -34,3 +34,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Obsidian vault (content/notes): drafts stay on your laptop, app settings are per-machine
+/content/notes/_drafts/
+/content/notes/.obsidian/
+/content/notes/.trash/

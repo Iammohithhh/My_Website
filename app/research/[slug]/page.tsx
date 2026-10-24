@@ -51,7 +51,7 @@ export default async function ResearchProjectPage({ params }: Props) {
   return (
     <article className="mx-auto max-w-prose">
       <p className="text-sm">
-        <Link href="/#research" className="link">
+        <Link href="/research" className="link">
           ← Research
         </Link>
       </p>

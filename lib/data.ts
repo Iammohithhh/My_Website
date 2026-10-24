@@ -22,8 +22,7 @@ export const personalInfo = {
 };
 
 export const intro = [
-  "I'm drawn to the space where physics meets machine learning: teaching models to respect the physics of atoms and molecules, and making simulations fast and accurate enough to answer real chemical questions.",
-  "I like understanding a problem from first principles and then building the tools to explore it, from simulation pipelines and differentiable code to the occasional robot.",
+  "I work at the intersection of physics, chemistry, and machine learning. I enjoy understanding things from first principles and building tools to explore them.",
 ];
 
 export const researchInterests = [

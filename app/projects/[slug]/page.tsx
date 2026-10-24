@@ -31,7 +31,7 @@ export default async function ProjectPage({ params }: Props) {
   return (
     <article className="mx-auto max-w-prose">
       <p className="text-sm">
-        <Link href="/#projects" className="link">
+        <Link href="/projects" className="link">
           ← Projects
         </Link>
       </p>

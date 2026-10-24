@@ -43,4 +43,18 @@
   .meta {
     @apply text-sm text-ink-muted;
   }
+
+  /* Notes: code blocks use the prose background, not highlight.js's white box */
+  .prose pre code.hljs {
+    background: transparent;
+    padding: 0;
+  }
+
+  /* Notes: footnotes as a quiet list under a rule, with a small label */
+  .prose .footnotes {
+    @apply mt-12 border-t border-line pt-4 text-base;
+  }
+  .prose .footnotes h2 {
+    @apply mt-0 mb-2 font-sans text-xs font-semibold uppercase tracking-widest text-ink-faint;
+  }
 }
