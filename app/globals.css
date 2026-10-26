@@ -57,4 +57,11 @@
   .prose .footnotes h2 {
     @apply mt-0 mb-2 font-sans text-xs font-semibold uppercase tracking-widest text-ink-faint;
   }
+
+  /* Notes: tall figures shrink to fit the screen, centred, instead of filling the column */
+  .prose figure img {
+    @apply mx-auto;
+    width: auto;
+    max-height: min(70vh, 32rem);
+  }
 }
